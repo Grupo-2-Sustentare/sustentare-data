@@ -24,53 +24,38 @@ INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VA
 -- ============================================================ Unidade de medida =============================================================================
 
 INSERT INTO unidade_medida (categoria, conversao_padrao, nome, simbolo) VALUES
-('Volume', 1.00, 'Litro', 'L'), -- bebidas feitas na hora
-('Volume', 0.01, 'Mililitro', 'mL'), -- Sobras de bebida
-('Massa', 1.00, 'Quilograma', 'kg'), -- Alimentos de consumo rápido
-('Massa', 0.001, 'Grama', 'g'), -- Alimentos de consumo rápido
-('Volume', 3.79, 'Galão', 'gal'), -- exemplo: galão de água
-('Volume', 0.24, 'Copo', 'copo'), --  Quantidade em copos
-('Volume', 1.00, 'Metro cúbico', 'm³'), -- Medida do espaço ocupado pelo produto
-('Unidade', 1.00, 'Unidade', 'un'), -- Quantidade de frutas - Unidade genérica
-('Unidade', 0.50, 'Metade da Prateleira', '1/2 pratel'); -- unidade genérica
+('Volume', 1.00, 'Litro', 'L'),
+('Volume', 0.01, 'Mililitro', 'mL'),
+('Massa', 1.00, 'Quilograma', 'kg'),
+('Massa', 0.001, 'Grama', 'g'),
+('Volume', 3.8, 'Galões', 'gal'),
+('Genérica', 1.00, 'Unidade Genérica', 'un'),
+('Genérica', 2.00, 'Kit refrigerante', 'kit');
 
 -- ========================================================== Unidades de medida audit ==========================================================================
 /*
 INSERT INTO unidade_medida_audit (descricao, dataHora, fkUsuario, fkUnidadeMedida) VALUES
-('Litro (bebidas feitas na hora)', '2024-05-25 10:00:00', 100, 1),
-('Mililitro (sobras de bebida)', '2024-05-25 10:10:00', 100, 2),
-('Quilograma (alimentos rápidos)', '2024-05-25 10:20:00', 100, 3),
-('Grama (alimentos rápidos)', '2024-05-25 10:30:00', 100, 4),
-('Galão (ex: galão de água)', '2024-05-25 10:40:00', 100, 5),
-('Copo (quantidade em copos)', '2024-05-25 10:50:00', 100, 6),
-('Metro cúbico (espaço ocupado)', '2024-05-25 11:00:00', 100, 7),
-('Unidade (quantidade de frutas)', '2024-05-25 11:10:00', 100, 8),
-('Metade da prateleira', '2024-05-25 11:20:00', 100, 9);
+('Litro', '2024-05-25 10:00:00', 100, 1),
+('Mililitro', '2024-05-25 10:10:00', 100, 2),
+('Quilograma', '2024-05-25 10:20:00', 100, 3),
+('Grama', '2024-05-25 10:30:00', 100, 4),
+('Unidade', '2024-05-25 11:10:00', 100, 8),
 */
 -- =================================================================== Categoria ===============================================================================
 
 INSERT INTO categoria_item (nome) VALUES
+('Self-service'),
+('Bebidas'),
+('Descartáveis'),
 ('Produtos de limpeza'),
 ('Frente de caixa'),
-('Bebidas'),
-('Doces'),
-('Utensílios de cozinha'),
-('Descartáveis'),
-('Condimentos avulsos'),
-('Carnes'),
-('Peixes e frutos do mar'),
-('Grãos e cereais'),
-('Verduras e legumes'),
-('Frutas'),
-('Laticínios'),
-('Congelados'), -- Criado pelo usuário -> audit
-('Sobremesas'); -- Criado pelo usuário -> audit
+('Condimentos'),
+('Doces por encomenda'); -- Criado pelo usuário -> audit
 
 -- =============================================================== Categoria Audit ================================================================================
 /*
 INSERT INTO categoria_item_audit (descricao, dataHora, fkCategoriaItem, fkUsuario) VALUES
-('Criação da categoria: Congelados', '2024-05-25 10:00:00', 14, 100),
-('Criação da categoria: Sobremesas', '2024-05-25 10:10:00', 15, 100);
+('Criação da categoria: Doces por encomenda', '2024-05-25 10:00:00', 14, 100);
 */
 -- ==================================================================== Item =====================================================================================
 
