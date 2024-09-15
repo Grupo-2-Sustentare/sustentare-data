@@ -4,8 +4,6 @@ INSERT INTO usuario (nome, email, senha, acesso) VALUES
 ('Antônio', 'antonio@email.com', '123', 1),
 ('Maria Souza', 'maria.souza@gmail.com', 'senha456', 2),
 ('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2);
-
-Select * from usuario;
 -- ============================================================== Audit usuário =============================================================================
 -- Inserts para criação dos 8 usuários
 /*INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VALUES
@@ -22,8 +20,6 @@ INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VA
 ('Alteração de senha', '2024-05-26 14:30:00', 102, 103),
 ('Alteração de email', '2024-05-27 09:15:00', 103, 104),
 ('Atualização de perfil de acesso', '2024-05-28 16:45:00', 104, 105);
-
-Select * from usuario_audit;
 */
 -- ============================================================ Unidade de medida =============================================================================
 
@@ -38,7 +34,6 @@ INSERT INTO unidade_medida (categoria, conversao_padrao, nome, simbolo) VALUES
 ('Unidade', 1.00, 'Unidade', 'un'), -- Quantidade de frutas - Unidade genérica
 ('Unidade', 0.50, 'Metade da Prateleira', '1/2 pratel'); -- unidade genérica
 
-Select * from unidade_medida;
 -- ========================================================== Unidades de medida audit ==========================================================================
 /*
 INSERT INTO unidade_medida_audit (descricao, dataHora, fkUsuario, fkUnidadeMedida) VALUES
@@ -51,8 +46,6 @@ INSERT INTO unidade_medida_audit (descricao, dataHora, fkUsuario, fkUnidadeMedid
 ('Metro cúbico (espaço ocupado)', '2024-05-25 11:00:00', 100, 7),
 ('Unidade (quantidade de frutas)', '2024-05-25 11:10:00', 100, 8),
 ('Metade da prateleira', '2024-05-25 11:20:00', 100, 9);
-
-Select * from unidade_medida_audit;
 */
 -- =================================================================== Categoria ===============================================================================
 
@@ -73,14 +66,11 @@ INSERT INTO categoria_item (nome) VALUES
 ('Congelados'), -- Criado pelo usuário -> audit
 ('Sobremesas'); -- Criado pelo usuário -> audit
 
-Select * from categoria_item;
 -- =============================================================== Categoria Audit ================================================================================
 /*
 INSERT INTO categoria_item_audit (descricao, dataHora, fkCategoriaItem, fkUsuario) VALUES
 ('Criação da categoria: Congelados', '2024-05-25 10:00:00', 14, 100),
 ('Criação da categoria: Sobremesas', '2024-05-25 10:10:00', 15, 100);
-
-Select * from categoria_item_audit;
 */
 -- ==================================================================== Item =====================================================================================
 
@@ -101,8 +91,6 @@ INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_ve
 (14, 'Sorvete', 1, 6, 180), -- Congelados, Volume (copo)
 (15, 'Bolo de chocolate', 1, 8, 7); -- Sobremesas, Unidade (un)
 
-Select * from item;
-
 -- ==================================================================== Item audit =================================================================================
 /*
 INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
@@ -121,8 +109,6 @@ INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
 ('Adição de Queijo', NOW(), 13, 104), -- Paulo Santos adicionou Queijo
 ('Adição de Sorvete', NOW(), 14, 105), -- Fernanda Lima adicionou Sorvete
 ('Adição de Bolo de chocolate', NOW(), 15, 106); -- Ricardo Alves adicionou Bolo de chocolate
-
-Select * from item_audit;
 */
 -- ================================================================== Produto =============================================================================
 
@@ -144,8 +130,6 @@ INSERT INTO produto (fk_item, nome, preco, qtd_produto, qtd_medida) VALUES
 (14, 'Sorvete Kibon 1L', 7.00, 50, 1.00), -- Sorvete em potes de 1 litro
 (15, 'Bolo de Chocolate Bauducco 1 un', 20.00, 40, 1.00); -- Bolo de chocolate, unidade
 
-Select * from produto;
-
 -- ============================================================= Produto Audit ======================================================================
 /*
 INSERT INTO produto_audit (descricao, dataHora, fkUsuario, fkProduto, fkItem) VALUES
@@ -165,8 +149,6 @@ INSERT INTO produto_audit (descricao, dataHora, fkUsuario, fkProduto, fkItem) VA
 ('Adição produto Queijo Tirol 500g', NOW(), 104, 14, 13), -- Paulo Santos adicionou Queijo Tirol
 ('Adição produto Sorvete Kibon 1L', NOW(), 105, 15, 14), -- Fernanda Lima adicionou Sorvete Kibon
 ('Adição produto Bolo Bauducco 1 un', NOW(), 106, 16, 15); -- Ricardo Alves adicionou Bolo Bauducco
-
-Select * from produto_audit;
 */
 -- ====================================================================== Fechamento ====================================================================
 
@@ -178,7 +160,6 @@ INSERT INTO fechamento_estoque (data_fim, data_inicio, data_fechamento, is_manua
 ('2024-08-01 00:00:00', '2024-07-01 00:00:00', '2024-08-01 00:00:00', 1),
 ('2024-09-01 00:00:00', '2024-08-01 00:00:00', '2024-09-01 00:00:00', 1);
 
-Select * from fechamento_estoque;
 -- ====================================================================== Fechamento Audit ====================================================================
 /*
 -- Inserts para fechamento_estoque_audit
@@ -188,8 +169,6 @@ INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkUsuario, fkFechamen
 ('Fechamento manual', NOW(), 102, 3),
 ('Fechamento manual', NOW(), 103, 4),
 ('Fechamento manual', NOW(), 104, 5);
-
-Select * from fechamento_estoque_audit;
 */
 -- ============================================================ Melhorar os inserts de Interação ===============================================================
 
