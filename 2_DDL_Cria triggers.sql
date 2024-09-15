@@ -1,4 +1,3 @@
-
 -- ANTES DE CRIAR OS TRIGGERS INSIRA O PRIMEIRO USUÁRIO!!!!!!
 -- Trigger usuario
 
