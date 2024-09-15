@@ -144,33 +144,33 @@ END$$
 DELIMITER ;
 
 -- Trigger fechamento estoque
+/*
+DELIMITER $$
+CREATE TRIGGER trg_insert_fechamento_estoque
+AFTER INSERT ON fechamento_estoque
+FOR EACH ROW
+BEGIN
+    INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkFechamentoEstoque, fkUsuario)
+    VALUES ('Inserção de novo fechamento de estoque', NOW(), NEW.id_estoque, @current_user_id);
+END$$
 
--- DELIMITER $$
--- CREATE TRIGGER trg_insert_fechamento_estoque
--- AFTER INSERT ON fechamento_estoque
--- FOR EACH ROW
--- BEGIN
---     INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkFechamentoEstoque, fkUsuario)
---     VALUES ('Inserção de novo fechamento de estoque', NOW(), NEW.id_estoque, @current_user_id);
--- END$$
+CREATE TRIGGER trg_update_fechamento_estoque
+AFTER UPDATE ON fechamento_estoque
+FOR EACH ROW
+BEGIN
+    INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkFechamentoEstoque, fkUsuario)
+    VALUES ('Atualização de fechamento de estoque', NOW(), NEW.id_estoque, @current_user_id);
+END$$
 
--- CREATE TRIGGER trg_update_fechamento_estoque
--- AFTER UPDATE ON fechamento_estoque
--- FOR EACH ROW
--- BEGIN
---     INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkFechamentoEstoque, fkUsuario)
---     VALUES ('Atualização de fechamento de estoque', NOW(), NEW.id_estoque, @current_user_id);
--- END$$
-
--- CREATE TRIGGER trg_delete_fechamento_estoque
--- AFTER DELETE ON fechamento_estoque
--- FOR EACH ROW
--- BEGIN
---     INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkFechamentoEstoque, fkUsuario)
---     VALUES ('Remoção de fechamento de estoque', NOW(), OLD.id_estoque, @current_user_id);
--- END$$
--- DELIMITER ;
-
+CREATE TRIGGER trg_delete_fechamento_estoque
+AFTER DELETE ON fechamento_estoque
+FOR EACH ROW
+BEGIN
+    INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkFechamentoEstoque, fkUsuario)
+    VALUES ('Remoção de fechamento de estoque', NOW(), OLD.id_estoque, @current_user_id);
+END$$
+DELIMITER ;
+*/
 
 -- Trigger interação estoque audit 
 

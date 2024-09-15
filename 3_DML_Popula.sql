@@ -10,16 +10,12 @@ INSERT INTO usuario (nome, email, senha, acesso) VALUES
 ('Criação de usuário', '2024-05-25 08:00:00', 100, 101),
 ('Criação de usuário', '2024-05-25 08:10:00', 100, 102),
 ('Criação de usuário', '2024-05-25 08:20:00', 100, 103),
-('Criação de usuário', '2024-05-25 08:30:00', 100, 104),
-('Criação de usuário', '2024-05-25 08:40:00', 100, 105),
-('Criação de usuário', '2024-05-25 08:50:00', 100, 106),
-('Criação de usuário', '2024-05-25 09:00:00', 100, 107);
 
 -- Inserts para 3 registros de alteração
 INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VALUES
-('Alteração de senha', '2024-05-26 14:30:00', 102, 103),
-('Alteração de email', '2024-05-27 09:15:00', 103, 104),
-('Atualização de perfil de acesso', '2024-05-28 16:45:00', 104, 105);
+('Alteração de senha', '2024-05-26 14:30:00', 100, 100),
+('Alteração de email', '2024-05-27 09:15:00', 100, 101),
+('Atualização de perfil de acesso', '2024-05-28 16:45:00', 100, 102);
 */
 -- ============================================================ Unidade de medida =============================================================================
 
@@ -44,7 +40,7 @@ INSERT INTO unidade_medida_audit (descricao, dataHora, fkUsuario, fkUnidadeMedid
 -- =================================================================== Categoria ===============================================================================
 
 INSERT INTO categoria_item (nome) VALUES
-('Self-service'),
+('Ingredientes self-service'),
 ('Bebidas'),
 ('Descartáveis'),
 ('Produtos de limpeza'),
@@ -60,40 +56,33 @@ INSERT INTO categoria_item_audit (descricao, dataHora, fkCategoriaItem, fkUsuari
 -- ==================================================================== Item =====================================================================================
 
 INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_vencimento) VALUES
-(1, 'Detergente', 0, 9, NULL), -- Produtos de limpeza, Comprimento (1/2 pratel)
-(2, 'Sacola plástica', 0, 8, NULL), -- Frente de caixa, Unidade (un)
-(3, 'Cerveja', 1, 2, 365), -- Bebidas, Volume (mL)
-(4, 'Chocolate', 1, 4, 180), -- Doces, Peso (g)
-(5, 'Panela', 0, 8, NULL), -- Utensílios de cozinha, Unidade (un)
-(6, 'Copo descartável', 0, 8, NULL), -- Descartáveis, Unidade (un)
-(7, 'Molho de tomate', 1, 1, 720), -- Molhos e temperos, Volume (L)
-(8, 'Filé de frango', 1, 3, 5), -- Carnes, Peso (kg)
-(9, 'Camarão', 1, 4, 3), -- Peixes e frutos do mar, Peso (g)
-(10, 'Arroz', 0, 3, 365), -- Grãos e cereais, Peso (kg)
-(11, 'Cenoura', 1, 8, 14), -- Verduras e legumes, Unidade (un)
-(12, 'Maçã', 1, 8, 30), -- Frutas, Unidade (un)
-(13, 'Queijo', 1, 3, 30), -- Laticínios, Peso (kg)
-(14, 'Sorvete', 1, 6, 180), -- Congelados, Volume (copo)
-(15, 'Bolo de chocolate', 1, 8, 7); -- Sobremesas, Unidade (un)
+(4, 'Detergente', 6, 6, NULL), -- Produtos de limpeza, Unidade (un)
+(3, 'Sacola plástica', 6, 6, NULL), -- Descartáveis, Unidade (un)
+(2, 'Brahma duplo malte lata', 1, 6, 30), -- Bebidas, Unidade (un)
+(2, 'Coca 300', 1, 6, 30), -- Bebidas, Unidade (un)
+(2, 'Coca Zero 300', 1, 6, 30), -- Bebidas,Unidade (un)
+(2, 'Heineken garrafa', 1, 6, 180), -- Bebidas, Unidade (un)
+(5, 'Chocolate crunch', 1, 4, 360), -- Frente de caixa, Peso (g)
+(1, 'Molho de tomate', 1, 1, 720), -- Ingredientes self-s, Volume (L)
+(1, 'Filé de frango', 1, 3, 5), -- Ingredientes self-s, Peso (kg)
+(1, 'Camarão', 1, 4, 3), -- Ingredientes self-s, Peso (g)
+(1, 'Arroz', 0, 3, 365), -- Ingredientes self-s, Peso (kg)
+(1, 'Cenoura', 1, 6, 14), -- Ingredientes self-s, Unidade (un)
+(1, 'Maçã', 1, 6, 30), -- Ingredientes self-s, Unidade (un)
+(1, 'Batata', 1, 6, 30), -- Ingredientes self-s, Unidade (un)
+(1, 'Abacaxi', 1, 6, 30), -- Ingredientes self-s, Unidade (un)
+(1, 'Contra Filé', 1, 3, 30), -- Ingredientes self-s, Peso (kg)
+(1, 'Feijão', 1, 3, 30), -- Ingredientes self-s, Peso (kg)
+(7, 'Banoffee', 1, 6, 30), -- Doces por encomenda self-s, Unidade (un)
+(1, 'Queijo mussarela', 1, 3, 30), -- Ingredientes self-s, Peso (kg)
+(7, 'Bolo de chocolate', 1, 6, 7); -- Doces por encomenda, Unidade (un)
 
 -- ==================================================================== Item audit =================================================================================
 /*
 INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
 ('Adição de Detergente', '2024-01-15 10:30:00', 1, 100), -- João Silva adicionou Detergente
 ('Adição de Sacola plástica', '2024-01-16 11:00:00', 2, 101), -- Maria Souza adicionou Sacola plástica
-('Adição de Cerveja', '2024-01-17 09:45:00', 3, 102), -- Carlos Pereira adicionou Cerveja
-('Adição de Chocolate', '2024-01-18 14:20:00', 4, 103), -- Ana Oliveira adicionou Chocolate
-('Adição de Panela', '2024-01-19 16:55:00', 5, 104), -- Paulo Santos adicionou Panela
-('Adição de Copo descartável', NOW(), 6, 105), -- Fernanda Lima adicionou Copo descartável
-('Adição de Molho de tomate', NOW(), 7, 106), -- Ricardo Alves adicionou Molho de tomate
-('Adição de Filé de frango', NOW(), 8, 107), -- Beatriz Ramos adicionou Filé de frango
-('Adição de Camarão', NOW(), 9, 100), -- João Silva adicionou Camarão
-('Adição de Arroz', NOW(), 10, 101), -- Maria Souza adicionou Arroz
-('Adição de Cenoura', NOW(), 11, 102), -- Carlos Pereira adicionou Cenoura
-('Adição de Maçã', NOW(), 12, 103), -- Ana Oliveira adicionou Maçã
-('Adição de Queijo', NOW(), 13, 104), -- Paulo Santos adicionou Queijo
-('Adição de Sorvete', NOW(), 14, 105), -- Fernanda Lima adicionou Sorvete
-('Adição de Bolo de chocolate', NOW(), 15, 106); -- Ricardo Alves adicionou Bolo de chocolate
+('Adição de Heineken garrafa', '2024-01-17 09:45:00', 3, 102), -- Carlos Pereira adicionou Cerveja
 */
 -- ================================================================== Produto =============================================================================
 
@@ -138,22 +127,17 @@ INSERT INTO produto_audit (descricao, dataHora, fkUsuario, fkProduto, fkItem) VA
 -- ====================================================================== Fechamento ====================================================================
 
 -- Inserts para fechamento_estoque
+/*
 INSERT INTO fechamento_estoque (data_fim, data_inicio, data_fechamento, is_manual) VALUES
 ('2024-05-01 00:00:00', '2024-04-01 00:00:00', '2024-05-01 00:00:00', 0),
-('2024-06-01 00:00:00', '2024-05-01 00:00:00', '2024-06-01 00:00:00', 0),
-('2024-07-01 00:00:00', '2024-06-01 00:00:00', '2024-07-01 00:00:00', 1),
-('2024-08-01 00:00:00', '2024-07-01 00:00:00', '2024-08-01 00:00:00', 1),
 ('2024-09-01 00:00:00', '2024-08-01 00:00:00', '2024-09-01 00:00:00', 1);
-
+*/
 -- ====================================================================== Fechamento Audit ====================================================================
 /*
 -- Inserts para fechamento_estoque_audit
 INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkUsuario, fkFechamentoEstoque) VALUES
 ('Fechamento automático', NOW(), 100, 1),
-('Fechamento automático', NOW(), 101, 2),
-('Fechamento manual', NOW(), 102, 3),
-('Fechamento manual', NOW(), 103, 4),
-('Fechamento manual', NOW(), 104, 5);
+('Fechamento manual', NOW(), 101, 3),
 */
 -- ============================================================ Melhorar os inserts de Interação ===============================================================
 
@@ -171,8 +155,6 @@ INSERT INTO interacao_estoque_audit (descricao, dataHora, fkUsuario, fkInteracao
 ('Adição de Detergente OMO', '2024-05-10 08:30:00', 100, 1, 1), -- João Silva adicionou Detergente OMO
 ('Adição de Cerveja Skol', '2024-05-15 14:45:00', 101, 2, 3), -- Maria Souza adicionou Cerveja Skol
 ('Retirada de Arroz Tio João', '2024-05-20 10:15:00', 102, 3, 10), -- Carlos Pereira retirou Arroz Tio João
-('Retirada de Arroz Camil', '2024-05-25 11:30:00', 103, 4, 11), -- Ana Oliveira retirou Arroz Camil
-('Adição de Cenoura Orgânica', '2024-05-30 09:00:00', 104, 5, 12); -- Paulo Santos adicionou Cenoura Orgânica
 */
 -- ============================================================================================================================================================
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
