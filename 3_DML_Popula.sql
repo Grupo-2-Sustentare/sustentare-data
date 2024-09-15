@@ -1,16 +1,9 @@
 USE sustentare;
 
-SET @current_user_id = 100; -- Exemplo de Usuário que está adicionando dados no banco
-
 INSERT INTO usuario (nome, email, senha, acesso) VALUES
-('João Silva', 'joao.silva@gmail.com', 'senha123', 1),
+('Antônio', 'antonio@email.com', '123', 1),
 ('Maria Souza', 'maria.souza@gmail.com', 'senha456', 2),
-('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2),
-('Ana Oliveira', 'ana.oliveira@gmail.com', 'senha101', 2),
-('Paulo Santos', 'paulo.santos@gmail.com', 'senha112', 2),
-('Fernanda Lima', 'fernanda.lima@gmail.com', 'senha131', 2),
-('Ricardo Alves', 'ricardo.alves@gmail.com', 'senha415', 2),
-('Beatriz Ramos', 'beatriz.ramos@gmail.com', 'senha161',2);
+('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2);
 
 Select * from usuario;
 -- ============================================================== Audit usuário =============================================================================
