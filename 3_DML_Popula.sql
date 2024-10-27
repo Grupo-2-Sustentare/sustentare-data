@@ -1,7 +1,6 @@
 USE sustentare;
 
 INSERT INTO usuario (nome, email, senha, acesso) VALUES
-('Antônio', 'antonio@email.com', '123', 1),
 ('Maria Souza', 'maria.souza@gmail.com', 'senha456', 2),
 ('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2);
 -- ============================================================== Audit usuário =============================================================================
@@ -19,14 +18,14 @@ INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VA
 */
 -- ============================================================ Unidade de medida =============================================================================
 
-INSERT INTO unidade_medida (categoria, conversao_padrao, nome, simbolo) VALUES
-('Volume', 1.00, 'Litro', 'L'),
-('Volume', 0.01, 'Mililitro', 'mL'),
-('Massa', 1.00, 'Quilograma', 'kg'),
-('Massa', 0.001, 'Grama', 'g'),
-('Volume', 3.8, 'Galões', 'gal'),
-('Genérica', 1.00, 'Unidade Genérica', 'un'),
-('Genérica', 2.00, 'Kit refrigerante', 'kit');
+INSERT INTO unidade_medida (categoria, conversao_padrao, nome, simbolo, ativo) VALUES
+('Volume', 1.00, 'Litro', 'L', 1),
+('Volume', 0.01, 'Mililitro', 'mL', 1),
+('Massa', 1.00, 'Quilograma', 'kg', 1),
+('Massa', 0.001, 'Grama', 'g', 1),
+('Volume', 3.8, 'Galões', 'gal', 1),
+('Genérica', 1.00, 'Unidade Genérica', 'un', 1),
+('Genérica', 2.00, 'Kit refrigerante', 'kit', 1);
 
 -- ========================================================== Unidades de medida audit ==========================================================================
 /*
@@ -39,14 +38,14 @@ INSERT INTO unidade_medida_audit (descricao, dataHora, fkUsuario, fkUnidadeMedid
 */
 -- =================================================================== Categoria ===============================================================================
 
-INSERT INTO categoria_item (nome) VALUES
-('Ingredientes self-service'),
-('Bebidas'),
-('Descartáveis'),
-('Produtos de limpeza'),
-('Frente de caixa'),
-('Condimentos'),
-('Doces por encomenda'); -- Criado pelo usuário -> audit
+INSERT INTO categoria_item (nome, ativo) VALUES
+('Ingredientes self-service', 1),
+('Bebidas', 1),
+('Descartáveis', 1),
+('Produtos de limpeza', 1),
+('Frente de caixa', 1),
+('Condimentos', 1),
+('Doces por encomenda', 1); -- Criado pelo usuário -> audit
 
 -- =============================================================== Categoria Audit ================================================================================
 /*
@@ -55,27 +54,27 @@ INSERT INTO categoria_item_audit (descricao, dataHora, fkCategoriaItem, fkUsuari
 */
 -- ==================================================================== Item =====================================================================================
 
-INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_vencimento) VALUES
-(4, 'Detergente', 6, 6, NULL), -- Produtos de limpeza, Unidade (un)
-(3, 'Sacola plástica', 6, 6, NULL), -- Descartáveis, Unidade (un)
-(2, 'Brahma duplo malte lata', 1, 6, 30), -- Bebidas, Unidade (un)
-(2, 'Coca 300', 1, 6, 30), -- Bebidas, Unidade (un)
-(2, 'Coca Zero 300', 1, 6, 30), -- Bebidas,Unidade (un)
-(2, 'Heineken garrafa', 1, 6, 180), -- Bebidas, Unidade (un)
-(5, 'Chocolate crunch', 1, 4, 360), -- Frente de caixa, Peso (g)
-(1, 'Molho de tomate', 1, 1, 720), -- Ingredientes self-s, Volume (L)
-(1, 'Filé de frango', 1, 3, 5), -- Ingredientes self-s, Peso (kg)
-(1, 'Camarão', 1, 4, 3), -- Ingredientes self-s, Peso (g)
-(1, 'Arroz', 0, 3, 365), -- Ingredientes self-s, Peso (kg)
-(1, 'Cenoura', 1, 6, 14), -- Ingredientes self-s, Unidade (un)
-(1, 'Maçã', 1, 6, 30), -- Ingredientes self-s, Unidade (un)
-(1, 'Batata', 1, 6, 30), -- Ingredientes self-s, Unidade (un)
-(1, 'Abacaxi', 1, 6, 30), -- Ingredientes self-s, Unidade (un)
-(1, 'Contra Filé', 1, 3, 30), -- Ingredientes self-s, Peso (kg)
-(1, 'Feijão', 1, 3, 30), -- Ingredientes self-s, Peso (kg)
-(7, 'Banoffee', 1, 6, 30), -- Doces por encomenda self-s, Unidade (un)
-(1, 'Queijo mussarela', 1, 3, 30), -- Ingredientes self-s, Peso (kg)
-(7, 'Bolo de chocolate', 1, 6, 7); -- Doces por encomenda, Unidade (un)
+INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_vencimento, ativo) VALUES
+(4, 'Detergente', 6, 6, NULL, 1), -- Produtos de limpeza, Unidade (un)
+(3, 'Sacola plástica', 6, 6, NULL, 1), -- Descartáveis, Unidade (un)
+(2, 'Brahma duplo malte lata', 1, 6, 30, 1), -- Bebidas, Unidade (un)
+(2, 'Coca 300', 1, 6, 30, 1), -- Bebidas, Unidade (un)
+(2, 'Coca Zero 300', 1, 6, 30, 1), -- Bebidas,Unidade (un)
+(2, 'Heineken garrafa', 1, 6, 180, 1), -- Bebidas, Unidade (un)
+(5, 'Chocolate crunch', 1, 4, 360, 1), -- Frente de caixa, Peso (g)
+(1, 'Molho de tomate', 1, 1, 720, 1), -- Ingredientes self-s, Volume (L)
+(1, 'Filé de frango', 1, 3, 5, 1), -- Ingredientes self-s, Peso (kg)
+(1, 'Camarão', 1, 4, 3, 1), -- Ingredientes self-s, Peso (g)
+(1, 'Arroz', 0, 3, 365, 1), -- Ingredientes self-s, Peso (kg)
+(1, 'Cenoura', 1, 6, 14, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Maçã', 1, 6, 30, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Batata', 1, 6, 30, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Abacaxi', 1, 6, 30, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Contra Filé', 1, 3, 30, 1), -- Ingredientes self-s, Peso (kg)
+(1, 'Feijão', 1, 3, 30, 1), -- Ingredientes self-s, Peso (kg)
+(7, 'Banoffee', 1, 6, 30, 1), -- Doces por encomenda self-s, Unidade (un)
+(1, 'Queijo mussarela', 1, 3, 30, 1), -- Ingredientes self-s, Peso (kg)
+(7, 'Bolo de chocolate', 1, 6, 7, 1); -- Doces por encomenda, Unidade (un)
 
 -- ==================================================================== Item audit =================================================================================
 /*
@@ -86,23 +85,23 @@ INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
 */
 -- ================================================================== Produto =============================================================================
 
-INSERT INTO produto (fk_item, nome, preco, qtd_produto, qtd_medida) VALUES
-(1, 'Detergente Líquido OMO 500ml', 3.50, 100, 0.50), -- Detergente em frascos de 500ml
-(2, 'Pacote de Sacolas Plásticas Carrefour (100 un)', 10.00, 50, 100.00), -- Pacotes com 100 sacolas plásticas
-(3, 'Cerveja Lata Skol 350ml', 2.50, 200, 0.35), -- Cerveja em latas de 350ml
-(4, 'Chocolate Barra Nestlé 200g', 5.00, 150, 0.20), -- Chocolate em barras de 200g
-(5, 'Panela Tramontina 2L', 20.00, 30, 2.00), -- Panela com capacidade de 2 litros
-(6, 'Copo Descartável Copobrás 200ml (pacote com 50)', 4.00, 80, 50.00), -- Pacotes com 50 copos descartáveis de 200ml
-(7, 'Molho de Tomate Heinz 340g', 3.75, 120, 0.34), -- Molho de tomate em latas de 340g
-(8, 'Filé de Frango Seara 1kg', 10.00, 60, 1.00), -- Filé de frango congelado em pacotes de 1kg
-(9, 'Camarão Qualitá 400g', 12.00, 50, 0.40), -- Camarão em pacotes de 400g
-(10, 'Arroz Tio João 5kg', 15.00, 70, 5.00), -- Sacos de arroz de 5kg
-(10, 'Arroz Camil 5kg', 14.50, 80, 5.00), -- Sacos de arroz de 5kg
-(11, 'Cenoura Orgânica 1kg', 3.00, 100, 1.00), -- Cenoura em pacotes de 1kg
-(12, 'Maçã Fuji 1kg', 4.00, 80, 1.00), -- Maçã em pacotes de 1kg
-(13, 'Queijo Mussarela Tirol 500g', 8.00, 90, 0.50), -- Queijo mussarela em pacotes de 500g
-(14, 'Sorvete Kibon 1L', 7.00, 50, 1.00), -- Sorvete em potes de 1 litro
-(15, 'Bolo de Chocolate Bauducco 1 un', 20.00, 40, 1.00); -- Bolo de chocolate, unidade
+INSERT INTO produto (fk_item, nome, preco, qtd_produto, qtd_medida, ativo) VALUES
+(1, 'Detergente Líquido OMO 500ml', 3.50, 100, 0.50, 1), -- Detergente em frascos de 500ml
+(2, 'Pacote de Sacolas Plásticas Carrefour (100 un)', 10.00, 50, 100.00, 1), -- Pacotes com 100 sacolas plásticas
+(3, 'Cerveja Lata Skol 350ml', 2.50, 200, 0.35, 1), -- Cerveja em latas de 350ml
+(4, 'Chocolate Barra Nestlé 200g', 5.00, 150, 0.20, 1), -- Chocolate em barras de 200g
+(5, 'Panela Tramontina 2L', 20.00, 30, 2.00, 1), -- Panela com capacidade de 2 litros
+(6, 'Copo Descartável Copobrás 200ml (pacote com 50)', 4.00, 80, 50.00, 1), -- Pacotes com 50 copos descartáveis de 200ml
+(7, 'Molho de Tomate Heinz 340g', 3.75, 120, 0.34, 1), -- Molho de tomate em latas de 340g
+(8, 'Filé de Frango Seara 1kg', 10.00, 60, 1.00, 1), -- Filé de frango congelado em pacotes de 1kg
+(9, 'Camarão Qualitá 400g', 12.00, 50, 0.40, 1), -- Camarão em pacotes de 400g
+(10, 'Arroz Tio João 5kg', 15.00, 70, 5.00, 1), -- Sacos de arroz de 5kg
+(10, 'Arroz Camil 5kg', 14.50, 80, 5.00, 1), -- Sacos de arroz de 5kg
+(11, 'Cenoura Orgânica 1kg', 3.00, 100, 1.00, 1), -- Cenoura em pacotes de 1kg
+(12, 'Maçã Fuji 1kg', 4.00, 80, 1.00, 1), -- Maçã em pacotes de 1kg
+(13, 'Queijo Mussarela Tirol 500g', 8.00, 90, 0.50, 1), -- Queijo mussarela em pacotes de 500g
+(14, 'Sorvete Kibon 1L', 7.00, 50, 1.00, 1), -- Sorvete em potes de 1 litro
+(15, 'Bolo de Chocolate Bauducco 1 un', 20.00, 40, 1.00, 1); -- Bolo de chocolate, unidade
 
 -- ============================================================= Produto Audit ======================================================================
 /*
