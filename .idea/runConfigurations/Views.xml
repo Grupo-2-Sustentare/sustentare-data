@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Views" type="DatabaseScript" editBeforeRun="true">
+    <script-file value="$PROJECT_DIR$/4_DDL_Cria views graficos.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="30813f43-2ff6-47ac-a855-4e8cbc14f8e6" namespace="schema/&quot;sustentare&quot;" />
+    <method v="2" />
+  </configuration>
+</component>

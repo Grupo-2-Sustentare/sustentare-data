@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Banco Sustentare" type="DatabaseScript" editBeforeRun="true">
+    <script-file value="$PROJECT_DIR$/1_DDL_Cria tabelas.sql" />
+    <script-file value="$PROJECT_DIR$/2_DDL_Cria triggers.sql" />
+    <script-file value="$PROJECT_DIR$/3_DML_Popula.sql" />
+    <script-file value="$PROJECT_DIR$/4_DDL_Cria views graficos.sql" />
+    <script-file value="$PROJECT_DIR$/5_DDL_Cria views KPIs.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="30813f43-2ff6-47ac-a855-4e8cbc14f8e6" />
+    <method v="2" />
+  </configuration>
+</component>
