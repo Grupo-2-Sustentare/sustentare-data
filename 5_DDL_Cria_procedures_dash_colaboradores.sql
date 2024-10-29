@@ -5,7 +5,6 @@ DELIMITER $ $ CREATE PROCEDURE sp_logs_operacoes(
 ) BEGIN
 SELECT
     u.nome AS nome_colaborador,
-    u.imagem_url AS imagem_colaborador,
     CASE
         WHEN ai.tipo_interacao = 'Entrada' THEN 'Entrada'
         ELSE 'Saída'
