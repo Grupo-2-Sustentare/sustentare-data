@@ -144,9 +144,9 @@ INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkUsuario, fkFechamen
 -- Inserts para interacao_estoque
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
 (1, '2024-07-10 08:30:00', 1, 'Entrada'), -- Adicionando Detergente OMO
-(3, '2024-07-15 14:45:00', 1, 'Entrada'), -- Adicionando Cerveja Skol
+(3, '2024-07-15 14:45:00', 1, 'Compra de última hora'), -- Adicionando Cerveja Skol
 (10, '2024-07-20 10:15:00', 1, 'Saída'), -- Retirando Arroz Tio João
-(11, '2024-07-25 11:30:00', 1, 'Saída'), -- Retirando Arroz Camil
+(11, '2024-07-25 11:30:00', 1, 'Prazo de validade'), -- Retirando Arroz Camil
 (12, '2024-07-30 09:00:00', 1, 'Entrada'); -- Adicionando Cenoura Orgânica
 
 /*
@@ -161,7 +161,7 @@ INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, cat
 (1, '2024-08-01 08:00:00', 1, 'Entrada'),
 (2, '2024-08-02 10:30:00', 1, 'Entrada'),
 (3, '2024-08-03 14:45:00', 1, 'Saída'),
-(4, '2024-08-04 11:20:00', 1, 'Entrada'),
+(4, '2024-08-04 11:20:00', 1, 'Compra de última hora'),
 (5, '2024-08-05 09:15:00', 1, 'Saída'),
 (6, '2024-08-06 12:00:00', 1, 'Entrada'),
 (7, '2024-08-07 16:30:00', 1, 'Saída'),
@@ -169,7 +169,7 @@ INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, cat
 (9, '2024-08-09 10:45:00', 1, 'Entrada'),
 (10, '2024-08-10 09:10:00', 1, 'Entrada'),
 (11, '2024-08-11 11:00:00', 1, 'Saída'),
-(12, '2024-08-12 14:25:00', 1, 'Entrada'),
+(12, '2024-08-12 14:25:00', 1, 'Compra de última hora'),
 (13, '2024-08-13 16:40:00', 1, 'Saída'),
 (14, '2024-08-14 08:50:00', 1, 'Entrada'),
 (15, '2024-08-15 10:15:00', 1, 'Saída'),
@@ -180,25 +180,25 @@ INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, cat
 (4, '2024-08-20 11:10:00', 1, 'Entrada'),
 (5, '2024-08-21 10:25:00', 1, 'Saída'),
 (6, '2024-08-22 12:45:00', 1, 'Entrada'),
-(7, '2024-08-23 14:00:00', 1, 'Entrada'),
+(7, '2024-08-23 14:00:00', 1, 'Compra de última hora'),
 (8, '2024-08-24 16:20:00', 1, 'Saída'),
 (9, '2024-08-25 08:40:00', 1, 'Entrada'),
-(10, '2024-08-26 09:50:00', 1, 'Saída'),
+(10, '2024-08-26 09:50:00', 1, 'Prazo de validade'),
 (11, '2024-08-27 11:15:00', 1, 'Entrada'),
 (12, '2024-08-28 13:00:00', 1, 'Entrada'),
-(13, '2024-08-29 15:30:00', 1, 'Saída'),
+(13, '2024-08-29 15:30:00', 1, 'Prazo de validade'),
 (14, '2024-08-30 14:10:00', 1, 'Entrada'),
 (15, '2024-08-31 16:40:00', 1, 'Saída'),
 (1, '2024-09-01 08:20:00', 2, 'Entrada'),
-(2, '2024-09-02 10:00:00', 2, 'Entrada'),
-(3, '2024-09-03 11:45:00', 2, 'Saída'),
+(2, '2024-09-02 10:00:00', 2, 'Compra de última hora'),
+(3, '2024-09-03 11:45:00', 2, 'Contaminado ou extraviado'),
 (4, '2024-09-04 12:30:00', 2, 'Entrada'),
 (5, '2024-09-05 14:15:00', 2, 'Saída'),
 (6, '2024-09-06 15:20:00', 2, 'Entrada'),
 (7, '2024-09-07 16:10:00', 2, 'Entrada'),
 (8, '2024-09-08 08:55:00', 2, 'Saída'),
 (9, '2024-09-09 09:40:00', 2, 'Entrada'),
-(10, '2024-09-10 10:25:00', 2, 'Entrada'),
+(10, '2024-09-10 10:25:00', 2, 'Compra de última hora'),
 (11, '2024-09-11 11:15:00', 2, 'Saída'),
 (12, '2024-09-12 13:00:00', 2, 'Entrada'),
 (13, '2024-09-13 14:45:00', 2, 'Saída'),
@@ -208,11 +208,11 @@ INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, cat
 (1, '2024-09-17 09:50:00', 2, 'Entrada'),
 (2, '2024-09-18 10:35:00', 2, 'Entrada'),
 (3, '2024-09-19 11:25:00', 2, 'Saída'),
-(4, '2024-09-20 13:05:00', 2, 'Entrada'),
+(4, '2024-09-20 13:05:00', 2, 'Compra de última hora'),
 (5, '2024-09-21 14:40:00', 2, 'Entrada'),
 (6, '2024-09-22 15:15:00', 2, 'Saída'),
-(7, '2024-09-23 16:00:00', 2, 'Entrada'),
-(8, '2024-09-24 08:45:00', 2, 'Saída'),
+(7, '2024-09-23 16:00:00', 2, 'Compra de última hora'),
+(8, '2024-09-24 08:45:00', 2, 'Contaminado ou extraviado'),
 (9, '2024-09-25 09:30:00', 2, 'Entrada'),
 (10, '2024-09-26 10:20:00', 2, 'Entrada'),
-(11, '2024-09-27 11:10:00', 2, 'Saída');
+(11, '2024-09-27 11:10:00', 2, 'Prazo de validade');
