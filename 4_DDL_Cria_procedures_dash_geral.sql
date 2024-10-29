@@ -41,7 +41,7 @@ GROUP BY
     c.nome,
     it.nome;
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
 
 DELIMITER $ $ CREATE PROCEDURE sp_perdas_por_mes (
     IN p_data_inicio DATE,
@@ -78,7 +78,7 @@ GROUP BY
     mes_ano,
     i.categoria_interacao;
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
 
 DELIMITER $ $ CREATE PROCEDURE sp_compras_regulares_vs_nao_planejadas (
     IN p_data_inicio DATE,
@@ -117,7 +117,7 @@ GROUP BY
 ORDER BY
     mes_ano;
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
 
 DELIMITER $ $ CREATE PROCEDURE sp_kpi_perdas(
     IN p_data_inicio DATE,
@@ -165,7 +165,7 @@ SET
 
 END IF;
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
 
 DELIMITER $ $ CREATE PROCEDURE sp_kpi_compras_nao_planejadas(
     IN p_data_inicio DATE,
@@ -210,7 +210,7 @@ SET
 
 END IF;
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
 
 DELIMITER $ $ CREATE PROCEDURE sp_kpi_valor_total_entradas(
     IN p_data_inicio DATE,
@@ -220,7 +220,7 @@ DELIMITER $ $ CREATE PROCEDURE sp_kpi_valor_total_entradas(
     OUT total_entradas DECIMAL(12, 2)
 ) BEGIN
 SELECT
-    SUM(ie.qtd_produto * p.preco) INTO total_entradas
+    SUM(ie. * p.preco) INTO total_entradas
 FROM
     interacao_estoque ie
     JOIN produto p ON ie.fk_produto = p.id_produto
@@ -239,7 +239,7 @@ WHERE
         OR p_itens IS NULL
     );
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
 
 DELIMITER $ $ CREATE PROCEDURE sp_kpi_valor_total_saidas(
     IN p_data_inicio DATE,
@@ -268,4 +268,4 @@ WHERE
         OR p_itens IS NULL
     );
 
-END $ $ DELIMITER;
+END $ $ DELIMITER ;
