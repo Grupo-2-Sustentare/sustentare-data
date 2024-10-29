@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     email VARCHAR(45) NOT NULL,
     senha VARCHAR(400) NOT NULL,
     acesso TINYINT NOT NULL,
-    ativo TINYINT NOT NULL,
+    ativo TINYINT NOT NULL DEFAULT(TRUE),
     PRIMARY KEY (id_usuario)
 ) AUTO_INCREMENT = 100;
 
