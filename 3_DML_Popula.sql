@@ -188,7 +188,7 @@ INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, cat
 (12, '2024-09-28 13:00:00', 1, 'Entrada'),
 (13, '2024-09-29 15:30:00', 1, 'Prazo de validade'),
 (14, '2024-09-30 14:10:00', 1, 'Entrada'),
-(15, '2024-09-31 16:40:00', 1, 'Saída'),
+(15, '2024-09-30 16:40:00', 1, 'Saída'),
 (1, '2024-10-01 08:20:00', 2, 'Entrada'),
 (2, '2024-10-02 10:00:00', 2, 'Compra de última hora'),
 (3, '2024-10-03 11:45:00', 2, 'Contaminado ou extraviado'),
