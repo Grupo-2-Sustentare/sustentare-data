@@ -220,7 +220,7 @@ DELIMITER $ $ CREATE PROCEDURE sp_kpi_valor_total_entradas(
     OUT total_entradas DECIMAL(12, 2)
 ) BEGIN
 SELECT
-    SUM(ie. * p.preco) INTO total_entradas
+    SUM(ie.qtd_produto * p.preco) INTO total_entradas
 FROM
     interacao_estoque ie
     JOIN produto p ON ie.fk_produto = p.id_produto
@@ -228,35 +228,6 @@ FROM
     JOIN categoria_item ci ON i.fk_categoria_item = ci.id_categoria_item
 WHERE
     ie.categoria_interacao = 'Compra'
-    AND ie.data_hora BETWEEN p_data_inicio
-    AND p_data_fim
-    AND (
-        FIND_IN_SET(ci.nome, p_categorias)
-        OR p_categorias IS NULL
-    )
-    AND (
-        FIND_IN_SET(i.nome, p_itens)
-        OR p_itens IS NULL
-    );
-
-END $ $ DELIMITER ;
-
-DELIMITER $ $ CREATE PROCEDURE sp_kpi_valor_total_saidas(
-    IN p_data_inicio DATE,
-    IN p_data_fim DATE,
-    IN p_categorias VARCHAR(255),
-    IN p_itens VARCHAR(255),
-    OUT total_saidas DECIMAL(12, 2)
-) BEGIN
-SELECT
-    SUM(ie.qtd_produto * p.preco) INTO total_saidas
-FROM
-    interacao_estoque ie
-    JOIN produto p ON ie.fk_produto = p.id_produto
-    JOIN item i ON p.fk_item = i.id_item
-    JOIN categoria_item ci ON i.fk_categoria_item = ci.id_categoria_item
-WHERE
-    ie.categoria_interacao = 'Venda'
     AND ie.data_hora BETWEEN p_data_inicio
     AND p_data_fim
     AND (
