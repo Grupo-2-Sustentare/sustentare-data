@@ -1,4 +1,4 @@
-DELIMITER $ $ CREATE PROCEDURE sp_logs_operacoes(
+DELIMITER $$ CREATE PROCEDURE sp_logs_operacoes(
     IN p_data_inicio DATE,
     IN p_data_fim DATE,
     IN p_colaboradores VARCHAR(1000)
@@ -24,9 +24,9 @@ WHERE
 ORDER BY
     ai.data_hora DESC;
 
-END $ $ DELIMITER ;
+END $$ DELIMITER;
 
-DELIMITER $ $ CREATE PROCEDURE sp_saldo_atual_estoque_filtrado(IN p_itens VARCHAR(255)) BEGIN
+DELIMITER $$ CREATE PROCEDURE sp_saldo_atual_estoque_filtrado(IN p_itens VARCHAR(255)) BEGIN
 SELECT
     i.nome AS nome_item,
     SUM(
@@ -48,9 +48,11 @@ WHERE
 GROUP BY
     i.id_item;
 
-END $ $ DELIMITER ;
+END $$ 
+DELIMITER;
 
-DELIMITER $ $ CREATE PROCEDURE sp_entradas_saidas_por_colaborador(
+DELIMITER $$ 
+CREATE PROCEDURE sp_entradas_saidas_por_colaborador(
     IN p_data_inicio DATE,
     IN p_data_fim DATE,
     IN p_colaboradores VARCHAR(255)
@@ -83,4 +85,4 @@ GROUP BY
 ORDER BY
     ie.usuario;
 
-END $ $ DELIMITER ;
+END $$ 

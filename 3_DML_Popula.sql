@@ -1,9 +1,9 @@
 USE sustentare;
 SET @current_user_id = 100; -- Exemplo de Usuário que está adicionando dados no banco
 
-INSERT INTO usuario (nome, email, senha, acesso) VALUES
-('Maria Souza', 'maria.souza@gmail.com', 'senha456', 2),
-('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2);
+INSERT INTO usuario (nome, email, senha, acesso, ativo) VALUES
+('Maria Souza', 'maria.souza@gmail.com', 'senha456', 2, 1),
+('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2, 1);
 -- ============================================================== Audit usuário =============================================================================
 -- Inserts para criação dos 8 usuários
 /*INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VALUES
@@ -88,21 +88,21 @@ INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
 
 INSERT INTO produto (fk_item, preco, qtd_produto, qtd_medida, ativo) VALUES
 (1, 3.50, 100, 0.50, 1), -- Detergente em frascos de 500ml
-(2,10.00, 50, 100.00, 1), -- Pacotes com 100 sacolas plásticas
-(3,2.50, 200, 0.35, 1), -- Cerveja em latas de 350ml
-(4,5.00, 150, 0.20, 1), -- Chocolate em barras de 200g
-(5,20.00, 30, 2.00, 1), -- Panela com capacidade de 2 litros
-(6,4.00, 80, 50.00, 1), -- Pacotes com 50 copos descartáveis de 200ml
-(7,3.75, 120, 0.34, 1), -- Molho de tomate em latas de 340g
-(8,  10.00, 60, 1.00, 1), -- Filé de frango congelado em pacotes de 1kg
-(9,  12.00, 50, 0.40, 1), -- Camarão em pacotes de 400g
-(10,15.00, 70, 5.00, 1), -- Sacos de arroz de 5kg
-(10,14.50, 80, 5.00, 1), -- Sacos de arroz de 5kg
+(2, 10.00, 50, 100.00, 1), -- Pacotes com 100 sacolas plásticas
+(3, 2.50, 200, 0.35, 1), -- Cerveja em latas de 350ml
+(4, 5.00, 150, 0.20, 1), -- Chocolate em barras de 200g
+(5, 20.00, 30, 2.00, 1), -- Panela com capacidade de 2 litros
+(6, 4.00, 80, 50.00, 1), -- Pacotes com 50 copos descartáveis de 200ml
+(7, 3.75, 120, 0.34, 1), -- Molho de tomate em latas de 340g
+(8, 10.00, 60, 1.00, 1), -- Filé de frango congelado em pacotes de 1kg
+(9, 12.00, 50, 0.40, 1), -- Camarão em pacotes de 400g
+(10, 15.00, 70, 5.00, 1), -- Sacos de arroz de 5kg
+(10, 14.50, 80, 5.00, 1), -- Sacos de arroz de 5kg
 (11, 3.00, 100, 1.00, 1), -- Cenoura em pacotes de 1kg
-(12,4.00, 80, 1.00, 1), -- Maçã em pacotes de 1kg
-(13,8.00, 90, 0.50, 1), -- Queijo mussarela em pacotes de 500g
-(14,  7.00, 50, 1.00, 1), -- Sorvete em potes de 1 litro
-(15,  20.00, 40, 1.00, 1); -- Bolo de chocolate, unidade
+(12, 4.00, 80, 1.00, 1), -- Maçã em pacotes de 1kg
+(13, 8.00, 90, 0.50, 1), -- Queijo mussarela em pacotes de 500g
+(14, 7.00, 50, 1.00, 1), -- Sorvete em potes de 1 litro
+(15, 20.00, 40, 1.00, 1); -- Bolo de chocolate, unidade
 
 -- ============================================================= Produto Audit ======================================================================
 /*
