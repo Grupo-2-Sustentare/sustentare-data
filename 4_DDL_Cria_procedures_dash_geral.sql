@@ -220,7 +220,7 @@ DELIMITER $ $ CREATE PROCEDURE sp_kpi_valor_total_entradas(
     OUT total_entradas DECIMAL(12, 2)
 ) BEGIN
 SELECT
-    SUM(ie.qtd_produto * p.preco) INTO total_entradas
+    SUM(p.qtd_produto * p.preco) INTO total_entradas
 FROM
     interacao_estoque ie
     JOIN produto p ON ie.fk_produto = p.id_produto
