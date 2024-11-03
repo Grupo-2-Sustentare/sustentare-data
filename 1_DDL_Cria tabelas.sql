@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS produto (
     fk_item INT NOT NULL,
     preco DECIMAL(8, 2) NOT NULL,
     qtd_produto INT NOT NULL,
+    qtd_produto_total INT NOT NULL,
     qtd_medida DECIMAL(12, 2) NOT NULL,
     ativo TINYINT NOT NULL,
     PRIMARY KEY (id_produto, fk_item),
@@ -110,26 +111,6 @@ CREATE TABLE IF NOT EXISTS produto_audit (
     FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
     FOREIGN KEY (fkProduto) REFERENCES produto (id_produto),
     FOREIGN KEY (fkItem) REFERENCES item (id_item)
-);
-
-CREATE TABLE IF NOT EXISTS fechamento_estoque (
-    id_estoque INT NOT NULL AUTO_INCREMENT,
-    data_fim DATETIME NOT NULL,
-    data_inicio DATETIME NOT NULL,
-    data_fechamento DATETIME NOT NULL,
-    is_manual TINYINT NOT NULL,
-    PRIMARY KEY (id_estoque)
-);
-
-CREATE TABLE IF NOT EXISTS fechamento_estoque_audit (
-    idFechamentoEstoqueAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    fkUsuario INT NOT NULL,
-    fkFechamentoEstoque INT NOT NULL,
-    PRIMARY KEY (idFechamentoEstoqueAudit),
-    CONSTRAINT fk_usuario_fechamento_estoque_audit FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT fk_fechamento_estoque_fechamento_estoque_audit FOREIGN KEY (fkFechamentoEstoque) REFERENCES fechamento_estoque (id_estoque)
 );
 
 CREATE TABLE IF NOT EXISTS interacao_estoque (
