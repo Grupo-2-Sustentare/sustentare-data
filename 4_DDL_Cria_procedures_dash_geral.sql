@@ -8,7 +8,7 @@ CREATE PROCEDURE sp_valor_entradas_saidas_mes (
 )
 BEGIN
     SELECT
-        DATE_FORMAT(i.data_hora, '%Y-%m') AS mes_ano,
+        DATE_FORMAT(i.data_hora, '%Y-%m-%d') AS dia,
         c.nome AS categoria,
         it.nome AS item,
         SUM(CASE WHEN i.categoria_interacao = 'Entrada' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
@@ -22,7 +22,7 @@ BEGIN
         i.data_hora BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
-    GROUP BY mes_ano, c.nome, it.nome;
+    GROUP BY dia, c.nome, it.nome;
 END $$
 
 DELIMITER $$
@@ -35,7 +35,7 @@ CREATE PROCEDURE sp_perdas_por_mes (
 )
 BEGIN
     SELECT
-        DATE_FORMAT(i.data_hora, '%Y-%m') AS mes_ano,
+        DATE_FORMAT(i.data_hora, '%Y-%m-%d') AS dia,
         i.categoria_interacao AS tipo_perda,
         SUM(p.qtd_produto) AS qtd_perda
     FROM
@@ -48,7 +48,7 @@ BEGIN
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
         AND i.categoria_interacao IN ('Prazo de validade', 'Contaminado ou extraviado', 'Não se sabe o paradeiro')
-    GROUP BY mes_ano, i.categoria_interacao;
+    GROUP BY i.categoria_interacao;
 END $$
 
 DELIMITER $$
@@ -61,12 +61,8 @@ CREATE PROCEDURE sp_compras_regulares_vs_nao_planejadas (
 )
 BEGIN
     SELECT
-        DATE_FORMAT(i.data_hora, '%Y-%m') AS mes_ano,
-        CASE 
-            WHEN i.categoria_interacao = 'Entrada' THEN 'entrada'
-            WHEN i.categoria_interacao = 'Compra de última hora' THEN 'ultima_hora'
-            ELSE 'outro'
-        END AS tipo_compra,
+        DATE_FORMAT(i.data_hora, '%Y-%m-%d') AS dia,
+        i.categoria_interacao AS tipo_compra,
         COUNT(i.id_interacao_estoque) AS qtd_compras
     FROM
         interacao_estoque i
@@ -75,11 +71,11 @@ BEGIN
     JOIN categoria_item c ON it.fk_categoria_item = c.id_categoria_item
     WHERE
         i.data_hora BETWEEN p_data_inicio AND p_data_fim
+        AND i.categoria_interacao IN ('Entrada', 'Compra de última hora')
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
-        AND i.categoria_interacao IN ('Entrada', 'Compra de última hora')
-    GROUP BY mes_ano, tipo_compra
-    ORDER BY mes_ano;
+    GROUP BY dia, i.categoria_interacao
+    ORDER BY dia;
 END $$
 
 DELIMITER $$
