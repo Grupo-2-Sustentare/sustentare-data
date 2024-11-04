@@ -90,13 +90,13 @@ INSERT INTO produto (fk_item, preco, qtd_produto, qtd_produto_total, qtd_medida,
 (1, 3.50, 100, 100,  0.50, 1), -- Detergente em frascos de 500ml
 (2, 10.00, 50, 100,  100.00, 1), -- Pacotes com 100 sacolas plásticas
 (3, 2.50, 200, 100,  0.35, 1), -- Cerveja em latas de 350ml
-(4, 5.00, 150, 100,  0.20, 1), -- Chocolate em barras de 200g
-(5, 20.00, 30, 100,  2.00, 1), -- Panela com capacidade de 2 litros
-(6, 4.00, 80, 100, 50.00, 1), -- Pacotes com 50 copos descartáveis de 200ml
-(7, 3.75, 120, 100,  0.34, 1), -- Molho de tomate em latas de 340g
+(4, 5.00, 150, 30,  0.20, 1), -- Chocolate em barras de 200g
+(5, 20.00, 30, 30,  2.00, 1), -- Panela com capacidade de 2 litros
+(6, 4.00, 80, 80, 50.00, 1), -- Pacotes com 50 copos descartáveis de 200ml
+(7, 3.75, 120, 80,  0.34, 1), -- Molho de tomate em latas de 340g
 (8, 10.00, 60, 100,  1.00, 1), -- Filé de frango congelado em pacotes de 1kg
 (9, 12.00, 50, 100,  0.40, 1), -- Camarão em pacotes de 400g
-(10, 15.00, 70, 100, 5.00, 1), -- Sacos de arroz de 5kg
+(10, 15.00, 70, 100, 5.00, 0), -- Sacos de arroz de 5kg
 (10, 14.50, 80, 100, 5.00, 1), -- Sacos de arroz de 5kg
 (11, 3.00, 100, 100, 1.00, 1), -- Cenoura em pacotes de 1kg
 (12, 4.00, 80, 100, 1.00, 1), -- Maçã em pacotes de 1kg
