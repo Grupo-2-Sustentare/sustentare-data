@@ -86,7 +86,7 @@ INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
 */
 -- ================================================================== Produto =============================================================================
 
-INSERT INTO produto (fk_item, preco, qtd_produto, qtd_produto_total qtd_medida, ativo) VALUES
+INSERT INTO produto (fk_item, preco, qtd_produto, qtd_produto_total, qtd_medida, ativo) VALUES
 (1, 3.50, 100, 100,  0.50, 1), -- Detergente em frascos de 500ml
 (2, 10.00, 50, 100,  100.00, 1), -- Pacotes com 100 sacolas plásticas
 (3, 2.50, 200, 100,  0.35, 1), -- Cerveja em latas de 350ml
