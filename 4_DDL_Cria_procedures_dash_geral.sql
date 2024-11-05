@@ -35,7 +35,6 @@ CREATE PROCEDURE sp_perdas_por_mes (
 )
 BEGIN
     SELECT
-        DATE_FORMAT(i.data_hora, '%Y-%m-%d') AS dia,
         i.categoria_interacao AS tipo_perda,
         SUM(p.qtd_produto) AS qtd_perda
     FROM
@@ -61,7 +60,6 @@ CREATE PROCEDURE sp_compras_regulares_vs_nao_planejadas (
 )
 BEGIN
     SELECT
-        DATE_FORMAT(i.data_hora, '%Y-%m-%d') AS dia,
         i.categoria_interacao AS tipo_compra,
         COUNT(i.id_interacao_estoque) AS qtd_compras
     FROM
@@ -74,12 +72,10 @@ BEGIN
         AND i.categoria_interacao IN ('Entrada', 'Compra de última hora')
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
-    GROUP BY dia, i.categoria_interacao
-    ORDER BY dia;
+    GROUP BY tipo_compra;
 END $$
 
 DELIMITER $$
-
 CREATE PROCEDURE sp_kpi_perdas(
     IN p_data_inicio DATE,
     IN p_data_fim DATE,
