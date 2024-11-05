@@ -8,11 +8,9 @@ CREATE PROCEDURE sp_valor_entradas_saidas_mes (
 )
 BEGIN
     SELECT
-        DATE_FORMAT(i.data_hora, '%Y-%m-%d') AS dia,
-        c.nome AS categoria,
-        it.nome AS item,
+        i.data_hora AS data,
         SUM(CASE WHEN i.categoria_interacao = 'Entrada' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
-        SUM(CASE WHEN i.categoria_interacao = 'Saída' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
+        SUM(CASE WHEN i.categoria_interacao <> 'Entrada' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
     FROM
         interacao_estoque i
     JOIN produto p ON i.fk_produto = p.id_produto
@@ -22,7 +20,7 @@ BEGIN
         i.data_hora BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
-    GROUP BY dia, c.nome, it.nome;
+    GROUP BY i.data_hora ORDER BY i.data_hora;
 END $$
 
 DELIMITER $$
