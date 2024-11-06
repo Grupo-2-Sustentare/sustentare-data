@@ -9,8 +9,8 @@ CREATE PROCEDURE sp_valor_entradas_saidas_mes (
 BEGIN
     SELECT
         i.data_hora AS data,
-        SUM(CASE WHEN i.categoria_interacao = 'Entrada' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
-        SUM(CASE WHEN i.categoria_interacao <> 'Entrada' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
+        SUM(CASE WHEN i.categoria_interacao = 'Entrada' or 'Compra de última hora' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
+        SUM(CASE WHEN i.categoria_interacao <> 'Entrada' or 'Compra de última hora' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
     FROM
         interacao_estoque i
     JOIN produto p ON i.fk_produto = p.id_produto
