@@ -126,9 +126,9 @@ BEGIN
         AND (FIND_IN_SET(ci.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(i.nome, p_itens) > 0 OR p_itens IS NULL);
 
-    IF total_compras_nao_planejadas <= 9 THEN
+    IF total_compras_nao_planejadas <= 3 THEN
         SET situacao = 'Bom';
-    ELSEIF total_compras_nao_planejadas BETWEEN 10 AND 19 THEN
+    ELSEIF total_compras_nao_planejadas BETWEEN 4 AND 6 THEN
         SET situacao = 'Mediano';
     ELSE
         SET situacao = 'Ruim';
