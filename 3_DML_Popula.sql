@@ -85,7 +85,7 @@ INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
 ('Entrada de Heineken garrafa', '2024-09-17 09:45:00', 3, 102), -- Carlos Pereira adicionou Cerveja
 */
 -- ================================================================== Produto =============================================================================
-
+SET @current_user_id = 101;
 INSERT INTO produto (fk_item, preco, qtd_produto, qtd_produto_total, qtd_medida, ativo) VALUES
 (1, 3.50, 100, 100,  0.50, 1), -- Detergente em frascos de 500ml
 (2, 10.00, 50, 100,  100.00, 1), -- Pacotes com 100 sacolas plásticas
@@ -140,7 +140,7 @@ INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkUsuario, fkFechamen
 ('Fechamento manual', NOW(), 101, 3),
 */
 -- ============================================================ Melhorar os inserts de Interação ===============================================================
-
+SET @current_user_id = 102;
 -- Inserts para interacao_estoque
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
 (1, '2024-08-10 08:30:00', 1, 'Entrada'), -- Adicionando Detergente OMO
@@ -157,6 +157,7 @@ INSERT INTO interacao_estoque_audit (descricao, dataHora, fkUsuario, fkInteracao
 ('Saída de Arroz Tio João', '2024-08-20 10:15:00', 102, 3, 10), -- Carlos Pereira retirou Arroz Tio João
 */
 -- ============================================================================================================================================================
+SET @current_user_id = 100;
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
 (1, '2024-09-01 08:00:00', 1, 'Entrada'),
 (2, '2024-09-02 10:30:00', 1, 'Entrada'),
@@ -213,14 +214,19 @@ INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, cat
 (1, '2024-10-17 09:50:00', 2, 'Entrada'),
 (2, '2024-10-18 10:35:00', 2, 'Entrada'),
 (3, '2024-10-19 11:25:00', 2, 'Saída'),
-(3, '2024-10-19 11:25:00', 2, 'Entrada'),
+(3, '2024-10-19 11:25:00', 2, 'Entrada');
+SET @current_user_id = 101;
+INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
 (4, '2024-10-20 13:05:00', 2, 'Entrada'),
 (5, '2024-10-21 14:40:00', 2, 'Entrada'),
 (6, '2024-10-22 15:15:00', 2, 'Saída'),
 (7, '2024-10-23 16:00:00', 2, 'Entrada'),
 (8, '2024-10-24 08:45:00', 2, 'Contaminado ou extraviado'),
 (9, '2024-10-24 08:45:00', 2, 'Não se sabe o paradeiro'),
-(10, '2024-10-24 08:45:00', 2, 'Não se sabe o paradeiro'),
+(10, '2024-10-24 08:45:00', 2, 'Não se sabe o paradeiro');
+SET @current_user_id = 102;
+INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
 (9, '2024-10-25 09:30:00', 2, 'Entrada'),
 (10, '2024-10-26 10:20:00', 2, 'Entrada'),
 (11, '2024-10-27 11:10:00', 2, 'Prazo de validade');
+SET @current_user_id = 100;
