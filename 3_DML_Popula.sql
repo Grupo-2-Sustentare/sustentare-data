@@ -55,27 +55,27 @@ INSERT INTO categoria_item_audit (descricao, dataHora, fkCategoriaItem, fkUsuari
 */
 -- ==================================================================== Item =====================================================================================
 
-INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_vencimento, ativo) VALUES
-(4, 'Detergente', 6, 6, NULL, 1), -- Produtos de limpeza, Unidade (un)
-(3, 'Sacola plástica', 6, 6, NULL, 1), -- Descartáveis, Unidade (un)
-(2, 'Brahma duplo malte lata', 1, 6, 30, 1), -- Bebidas, Unidade (un)
-(2, 'Coca 300', 1, 6, 30, 1), -- Bebidas, Unidade (un)
-(2, 'Coca Zero 300', 1, 6, 30, 1), -- Bebidas,Unidade (un)
-(2, 'Heineken garrafa', 1, 6, 180, 1), -- Bebidas, Unidade (un)
-(5, 'Chocolate crunch', 1, 4, 360, 1), -- Frente de caixa, Peso (g)
-(1, 'Molho de tomate', 1, 1, 720, 1), -- Ingredientes self-s, Volume (L)
-(1, 'Filé de frango', 1, 3, 5, 1), -- Ingredientes self-s, Peso (kg)
-(1, 'Camarão', 1, 4, 3, 1), -- Ingredientes self-s, Peso (g)
-(1, 'Arroz', 0, 3, 365, 1), -- Ingredientes self-s, Peso (kg)
-(1, 'Cenoura', 1, 6, 14, 1), -- Ingredientes self-s, Unidade (un)
-(1, 'Maçã', 1, 6, 30, 1), -- Ingredientes self-s, Unidade (un)
-(1, 'Batata', 1, 6, 30, 1), -- Ingredientes self-s, Unidade (un)
-(1, 'Abacaxi', 1, 6, 30, 1), -- Ingredientes self-s, Unidade (un)
-(1, 'Contra Filé', 1, 3, 30, 1), -- Ingredientes self-s, Peso (kg)
-(1, 'Feijão', 1, 3, 30, 1), -- Ingredientes self-s, Peso (kg)
-(7, 'Banoffee', 1, 6, 30, 1), -- Doces por encomenda self-s, Unidade (un)
-(1, 'Queijo mussarela', 1, 3, 30, 1), -- Ingredientes self-s, Peso (kg)
-(7, 'Bolo de chocolate', 1, 6, 7, 1); -- Doces por encomenda, Unidade (un)
+INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_vencimento, qtd_min_item, ativo) VALUES
+(4, 'Detergente', 6, 6, NULL, NULL, 1), -- Produtos de limpeza, Unidade (un)
+(3, 'Sacola plástica', 6, 6, NULL, 2, 1), -- Descartáveis, Unidade (un)
+(2, 'Brahma duplo malte lata', 1, 6, 30, 10, 1), -- Bebidas, Unidade (un)
+(2, 'Coca 300', 1, 6, 30, 10, 1), -- Bebidas, Unidade (un)
+(2, 'Coca Zero 300', 1, 6, 30, 10, 1), -- Bebidas,Unidade (un)
+(2, 'Heineken garrafa', 1, 6, 180, 10, 1), -- Bebidas, Unidade (un)
+(5, 'Chocolate crunch', 1, 4, 360, NULL, 1), -- Frente de caixa, Peso (g)
+(1, 'Molho de tomate', 1, 1, 720, 3, 1), -- Ingredientes self-s, Volume (L)
+(1, 'Filé de frango', 1, 3, 5, 4, 1), -- Ingredientes self-s, Peso (kg)
+(1, 'Camarão', 1, 4, 3, 8, 1), -- Ingredientes self-s, Peso (g)
+(1, 'Arroz', 0, 3, 365, 9, 1), -- Ingredientes self-s, Peso (kg)
+(1, 'Cenoura', 1, 6, 14, NULL, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Maçã', 1, 6, 30, NULL, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Batata', 1, 6, 30, NULL, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Abacaxi', 1, 6, 30, NULL, 1), -- Ingredientes self-s, Unidade (un)
+(1, 'Contra Filé', 1, 3, 30, NULL, 1), -- Ingredientes self-s, Peso (kg)
+(1, 'Feijão', 1, 3, 30, NULL, 1), -- Ingredientes self-s, Peso (kg)
+(7, 'Banoffee', 1, 6, 30, NULL, 1), -- Doces por encomenda self-s, Unidade (un)
+(1, 'Queijo mussarela', 1, 3, 30, NULL, 1), -- Ingredientes self-s, Peso (kg)
+(7, 'Bolo de chocolate', 1, 6, 7, NULL, 1); -- Doces por encomenda, Unidade (un)
 
 -- ==================================================================== Item audit =================================================================================
 /*
