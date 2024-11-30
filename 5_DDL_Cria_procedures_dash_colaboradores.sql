@@ -1,8 +1,7 @@
 DELIMITER $$
-
-CREATE PROCEDURE sp_auditoria_colaboradores (
-    IN p_data_inicio DATETIME,
-    IN p_data_fim DATETIME,
+CREATE PROCEDURE sp_auditoria_colaboradores(
+    IN p_data_inicio DATE,
+    IN p_data_fim DATE,
     IN p_responsaveis VARCHAR(255) -- Lista de IDs dos colaboradores responsáveis separados por vírgula
 )
 BEGIN
@@ -16,7 +15,7 @@ BEGIN
     FROM usuario_audit ua
     LEFT JOIN usuario u ON ua.responsavel = u.id_usuario
     LEFT JOIN usuario u_alterado ON ua.usuarioAlterado = u_alterado.id_usuario
-    WHERE ua.dataHora BETWEEN p_data_inicio AND p_data_fim
+    WHERE DATE(ua.dataHora) BETWEEN p_data_inicio AND p_data_fim
       AND (FIND_IN_SET(u.nome, p_responsaveis) > 0 OR p_responsaveis IS NULL)
 
     UNION ALL
@@ -31,7 +30,7 @@ BEGIN
     FROM unidade_medida_audit uma
     LEFT JOIN usuario u ON uma.fkUsuario = u.id_usuario
     LEFT JOIN unidade_medida um_alterado ON uma.fkUnidadeMedida = um_alterado.id_unidade_medida
-    WHERE uma.dataHora BETWEEN p_data_inicio AND p_data_fim
+    WHERE DATE(uma.dataHora) BETWEEN p_data_inicio AND p_data_fim
       AND (FIND_IN_SET(u.nome, p_responsaveis) > 0 OR p_responsaveis IS NULL)
 
     UNION ALL
@@ -46,7 +45,7 @@ BEGIN
     FROM categoria_item_audit ca
     LEFT JOIN usuario u ON ca.fkUsuario = u.id_usuario
     LEFT JOIN categoria_item ci_alterado ON ca.fkCategoriaItem = ci_alterado.id_categoria_item
-    WHERE ca.dataHora BETWEEN p_data_inicio AND p_data_fim
+    WHERE DATE(ca.dataHora) BETWEEN p_data_inicio AND p_data_fim
       AND (FIND_IN_SET(u.nome, p_responsaveis) > 0 OR p_responsaveis IS NULL)
 
     UNION ALL
@@ -61,7 +60,7 @@ BEGIN
     FROM item_audit ia
     LEFT JOIN usuario u ON ia.fkUsuario = u.id_usuario
     LEFT JOIN item i_alterado ON ia.fkItem = i_alterado.id_item
-    WHERE ia.dataHora BETWEEN p_data_inicio AND p_data_fim
+    WHERE DATE(ia.dataHora) BETWEEN p_data_inicio AND p_data_fim
       AND (FIND_IN_SET(u.nome, p_responsaveis) > 0 OR p_responsaveis IS NULL)
 
     UNION ALL
@@ -77,7 +76,7 @@ BEGIN
     LEFT JOIN usuario u ON pa.fkUsuario = u.id_usuario
     LEFT JOIN produto p_alterado ON pa.fkProduto = p_alterado.id_produto
     LEFT JOIN item i_alterado ON p_alterado.fk_item = i_alterado.id_item
-    WHERE pa.dataHora BETWEEN p_data_inicio AND p_data_fim
+    WHERE DATE(pa.dataHora) BETWEEN p_data_inicio AND p_data_fim
       AND (FIND_IN_SET(u.nome, p_responsaveis) > 0 OR p_responsaveis IS NULL)
 
     UNION ALL
@@ -94,7 +93,7 @@ BEGIN
     LEFT JOIN interacao_estoque ie_alterado ON iea.fkInteracaoEstoque = ie_alterado.id_interacao_estoque
     LEFT JOIN produto p_inter ON ie_alterado.fk_produto = p_inter.id_produto
     LEFT JOIN item i_prod ON p_inter.fk_item = i_prod.id_item
-    WHERE iea.dataHora BETWEEN p_data_inicio AND p_data_fim
+    WHERE DATE(iea.dataHora) BETWEEN p_data_inicio AND p_data_fim
       AND (FIND_IN_SET(u.nome, p_responsaveis) > 0 OR p_responsaveis IS NULL)
 
     ORDER BY data_acao DESC;
