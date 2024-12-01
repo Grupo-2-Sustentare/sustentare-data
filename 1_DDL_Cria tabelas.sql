@@ -136,6 +136,6 @@ CREATE TABLE IF NOT EXISTS interacao_estoque_audit (
     CONSTRAINT fk_interacao_estoque_interacao_estoque_audit FOREIGN KEY (fkInteracaoEstoque, fkProduto) REFERENCES interacao_estoque (id_interacao_estoque, fk_produto)
 );
 
-CREATE USER IF NOT EXISTS 'paralelo19' @'localhost' IDENTIFIED BY 'urubu100';
+CREATE USER IF NOT EXISTS 'projetoSemente' @'localhost' IDENTIFIED BY 'urubu100';
 
 GRANT ALL PRIVILEGES ON sustentare.* TO 'paralelo19' @'localhost';
