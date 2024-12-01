@@ -8,7 +8,7 @@ CREATE PROCEDURE sp_valor_entradas_saidas_mes (
 )
 BEGIN
     SELECT
-        i.data_hora AS data,
+        DATE(i.data_hora) AS data,
         SUM(CASE WHEN (i.categoria_interacao = 'Entrada' or i.categoria_interacao = 'Compra de última hora') THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
         SUM(CASE WHEN (i.categoria_interacao <> 'Entrada' and i.categoria_interacao <> 'Compra de última hora') THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
     FROM
@@ -20,7 +20,7 @@ BEGIN
         DATE(i.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
-    GROUP BY i.data_hora ORDER BY i.data_hora;
+    GROUP BY DATE(i.data_hora) ORDER BY DATE(i.data_hora);
 END $$
 
 DELIMITER $$
@@ -44,7 +44,8 @@ BEGIN
         DATE(i.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
-        AND i.categoria_interacao IN ('Prazo de validade', 'Contaminado ou extraviado', 'Não se sabe o paradeiro')
+        AND i.categoria_interacao IN 
+        ('Prazo de validade', 'Contaminado ou extraviado', 'Não se sabe o paradeiro')
     GROUP BY i.categoria_interacao;
 END $$
 
