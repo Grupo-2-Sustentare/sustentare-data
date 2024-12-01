@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS item (
     perecivel TINYINT NOT NULL,
     fk_unidade_medida INT NOT NULL,
     dias_vencimento INT,
-    qtd_min_item DECIMAL(6, 2),
+    qtd_min_item DECIMAL(6, 2) NOT NULL DEFAULT(0.0),
     ativo TINYINT NOT NULL,
     PRIMARY KEY (id_item),
     CONSTRAINT fk_categoria_item FOREIGN KEY (fk_categoria_item) REFERENCES categoria_item (id_categoria_item),
