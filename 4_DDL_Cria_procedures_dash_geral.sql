@@ -9,15 +9,15 @@ CREATE PROCEDURE sp_valor_entradas_saidas_mes (
 BEGIN
     SELECT
         i.data_hora AS data,
-        SUM(CASE WHEN i.categoria_interacao = 'Entrada' or 'Compra de última hora' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
-        SUM(CASE WHEN i.categoria_interacao <> 'Entrada' or 'Compra de última hora' THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
+        SUM(CASE WHEN (i.categoria_interacao = 'Entrada' or i.categoria_interacao = 'Compra de última hora') THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_entradas,
+        SUM(CASE WHEN (i.categoria_interacao <> 'Entrada' and i.categoria_interacao <> 'Compra de última hora') THEN p.preco * p.qtd_produto ELSE 0 END) AS valor_saidas
     FROM
         interacao_estoque i
     JOIN produto p ON i.fk_produto = p.id_produto
     JOIN item it ON p.fk_item = it.id_item
     JOIN categoria_item c ON it.fk_categoria_item = c.id_categoria_item
     WHERE
-        i.data_hora BETWEEN p_data_inicio AND p_data_fim
+        DATE(i.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
     GROUP BY i.data_hora ORDER BY i.data_hora;
@@ -41,7 +41,7 @@ BEGIN
     JOIN item it ON p.fk_item = it.id_item
     JOIN categoria_item c ON it.fk_categoria_item = c.id_categoria_item
     WHERE
-        i.data_hora BETWEEN p_data_inicio AND p_data_fim
+        DATE(i.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
         AND i.categoria_interacao IN ('Prazo de validade', 'Contaminado ou extraviado', 'Não se sabe o paradeiro')
@@ -66,7 +66,7 @@ BEGIN
     JOIN item it ON p.fk_item = it.id_item
     JOIN categoria_item c ON it.fk_categoria_item = c.id_categoria_item
     WHERE
-        i.data_hora BETWEEN p_data_inicio AND p_data_fim
+        DATE(i.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND i.categoria_interacao IN ('Entrada', 'Compra de última hora')
         AND (FIND_IN_SET(c.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(it.nome, p_itens) > 0 OR p_itens IS NULL)
@@ -90,7 +90,7 @@ BEGIN
     JOIN categoria_item ci ON i.fk_categoria_item = ci.id_categoria_item
     WHERE
         ie.categoria_interacao IN ('Prazo de validade', 'Contaminado ou extraviado', 'Não se sabe o paradeiro')
-        AND ie.data_hora BETWEEN p_data_inicio AND p_data_fim
+        AND DATE(ie.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(ci.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(i.nome, p_itens) > 0 OR p_itens IS NULL);
 
@@ -122,7 +122,7 @@ BEGIN
     JOIN categoria_item ci ON i.fk_categoria_item = ci.id_categoria_item
     WHERE
         ie.categoria_interacao = 'Compra de última hora'
-        AND ie.data_hora BETWEEN p_data_inicio AND p_data_fim
+        AND DATE(ie.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(ci.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(i.nome, p_itens) > 0 OR p_itens IS NULL);
 
@@ -155,8 +155,8 @@ BEGIN
     JOIN 
         categoria_item ci ON i.fk_categoria_item = ci.id_categoria_item
     WHERE 
-        ie.categoria_interacao = 'Entrada'
-        AND ie.data_hora BETWEEN p_data_inicio AND p_data_fim
+        (ie.categoria_interacao = 'Entrada' OR ie.categoria_interacao = 'Compra de última hora')
+        AND DATE(ie.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (FIND_IN_SET(ci.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(i.nome, p_itens) > 0 OR p_itens IS NULL);
 END $$

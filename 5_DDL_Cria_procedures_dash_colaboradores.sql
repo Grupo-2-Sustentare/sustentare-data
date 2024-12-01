@@ -127,7 +127,7 @@ BEGIN
     JOIN interacao_estoque_audit a ON ie.id_interacao_estoque = a.fkInteracaoEstoque
     JOIN sustentare.usuario u on a.fkUsuario = u.id_usuario
     WHERE
-        ie.data_hora BETWEEN p_data_inicio AND p_data_fim
+        DATE(ie.data_hora) BETWEEN p_data_inicio AND p_data_fim
         AND (
             FIND_IN_SET(u.nome, p_colaboradores) > 0
             OR p_colaboradores IS NULL
