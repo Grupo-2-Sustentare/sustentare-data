@@ -119,8 +119,10 @@ BEGIN
         ) AS qtd_entradas,
         SUM(
             CASE
-                WHEN ie.categoria_interacao IN ('Saída', 'Prazo de validade', 'Contaminado ou extraviado', 'Não se sabe o paradeiro') THEN 1
-                ELSE 0
+                WHEN ie.categoria_interacao IN 
+                ('Uso no buffet ou vendas individuais (regular)', 'Ajuste por marcação anterior errada', 'Passou do prazo de validade',
+                'Foi contaminado ou extraviado', 'Não se sabe o paradeiro') 
+                THEN 1 ELSE 0
             END
         ) AS qtd_saidas
     FROM interacao_estoque ie
