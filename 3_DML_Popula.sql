@@ -7,15 +7,15 @@ INSERT INTO usuario (nome, email, senha, acesso, ativo) VALUES
 -- ============================================================== Audit usuário =============================================================================
 -- Inserts para criação dos 8 usuários
 /*INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VALUES
-('Criação de usuário', '2024-08-25 08:00:00', 100, 101),
-('Criação de usuário', '2024-08-25 08:10:00', 100, 102),
-('Criação de usuário', '2024-08-25 08:20:00', 100, 103),
+('Criação de usuário', '2024-09-25 08:00:00', 100, 101),
+('Criação de usuário', '2024-09-25 08:10:00', 100, 102),
+('Criação de usuário', '2024-09-25 08:20:00', 100, 103),
 
 -- Inserts para 3 registros de alteração
 INSERT INTO usuario_audit (descricao, dataHora, responsavel, usuarioAlterado) VALUES
-('Alteração de senha', '2024-08-26 14:30:00', 100, 100),
-('Alteração de email', '2024-08-27 09:15:00', 100, 101),
-('Atualização de perfil de acesso', '2024-08-28 16:45:00', 100, 102);
+('Alteração de senha', '2024-09-26 14:30:00', 100, 100),
+('Alteração de email', '2024-09-27 09:15:00', 100, 101),
+('Atualização de perfil de acesso', '2024-09-28 16:45:00', 100, 102);
 */
 -- ============================================================ Unidade de medida =============================================================================
 
@@ -31,11 +31,11 @@ INSERT INTO unidade_medida (categoria, conversao_padrao, nome, simbolo, ativo) V
 -- ========================================================== Unidades de medida audit ==========================================================================
 /*
 INSERT INTO unidade_medida_audit (descricao, dataHora, fkUsuario, fkUnidadeMedida) VALUES
-('Litro', '2024-08-25 10:00:00', 100, 1),
-('Mililitro', '2024-08-25 10:10:00', 100, 2),
-('Quilograma', '2024-08-25 10:20:00', 100, 3),
-('Grama', '2024-08-25 10:30:00', 100, 4),
-('Unidade', '2024-08-25 11:10:00', 100, 8),
+('Litro', '2024-09-25 10:00:00', 100, 1),
+('Mililitro', '2024-09-25 10:10:00', 100, 2),
+('Quilograma', '2024-09-25 10:20:00', 100, 3),
+('Grama', '2024-09-25 10:30:00', 100, 4),
+('Unidade', '2024-09-25 11:10:00', 100, 8),
 */
 -- =================================================================== Categoria ===============================================================================
 
@@ -51,7 +51,7 @@ INSERT INTO categoria_item (nome, ativo) VALUES
 -- =============================================================== Categoria Audit ================================================================================
 /*
 INSERT INTO categoria_item_audit (descricao, dataHora, fkCategoriaItem, fkUsuario) VALUES
-('Criação da categoria: Doces por encomenda', '2024-08-25 10:00:00', 14, 100);
+('Criação da categoria: Doces por encomenda', '2024-09-25 10:00:00', 14, 100);
 */
 -- ==================================================================== Item =====================================================================================
 
@@ -80,9 +80,9 @@ INSERT INTO item (fk_categoria_item, nome, perecivel, fk_unidade_medida, dias_ve
 -- ==================================================================== Item audit =================================================================================
 /*
 INSERT INTO item_audit (descricao, dataHora, fkItem, fkUsuario) VALUES
-('Entrada de Detergente', '2024-09-15 10:30:00', 1, 100), -- João Silva adicionou Detergente
-('Entrada de Sacola plástica', '2024-09-16 11:00:00', 2, 101), -- Maria Souza adicionou Sacola plástica
-('Entrada de Heineken garrafa', '2024-09-17 09:45:00', 3, 102), -- Carlos Pereira adicionou Cerveja
+('Entrada de Detergente', '2024-10-15 10:30:00', 1, 100), -- João Silva adicionou Detergente
+('Entrada de Sacola plástica', '2024-10-16 11:00:00', 2, 101), -- Maria Souza adicionou Sacola plástica
+('Entrada de Heineken garrafa', '2024-10-17 09:45:00', 3, 102), -- Carlos Pereira adicionou Cerveja
 */
 -- ================================================================== Produto =============================================================================
 SET @current_user_id = 101;
@@ -129,8 +129,8 @@ INSERT INTO produto_audit (descricao, dataHora, fkUsuario, fkProduto, fkItem) VA
 -- Inserts para fechamento_estoque
 /*
 INSERT INTO fechamento_estoque (data_fim, data_inicio, data_fechamento, is_manual) VALUES
-('2024-08-01 00:00:00', '2024-04-01 00:00:00', '2024-08-01 00:00:00', 0),
-('2024-10-01 00:00:00', '2024-09-01 00:00:00', '2024-10-01 00:00:00', 1);
+('2024-09-01 00:00:00', '2024-04-01 00:00:00', '2024-09-01 00:00:00', 0),
+('2024-11-01 00:00:00', '2024-10-01 00:00:00', '2024-11-01 00:00:00', 1);
 */
 -- ====================================================================== Fechamento Audit ====================================================================
 /*
@@ -141,92 +141,153 @@ INSERT INTO fechamento_estoque_audit (descricao, dataHora, fkUsuario, fkFechamen
 */
 -- ============================================================ Melhorar os inserts de Interação ===============================================================
 SET @current_user_id = 102;
--- Inserts para interacao_estoque
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
-(1, '2024-08-10 08:30:00', 1, 'Entrada'), -- Adicionando Detergente OMO
-(3, '2024-08-15 14:45:00', 1, 'Compra de última hora'), -- Adicionando Cerveja Skol
-(10, '2024-08-20 10:15:00', 1, 'Saída'), -- Retirando Arroz Tio João
-(11, '2024-08-25 11:30:00', 1, 'Prazo de validade'), -- Retirando Arroz Camil
-(12, '2024-08-30 09:00:00', 1, 'Entrada'); -- Adicionando Cenoura Orgânica
+(1, '2024-08-01 08:00:00', 1, 'Entrada'),
+(2, '2024-08-02 10:15:00', 1, 'Entrada'),
+(3, '2024-08-05 14:30:00', 1, 'Saída'),
+(4, '2024-08-06 16:00:00', 1, 'Entrada'),
+(5, '2024-08-07 11:10:00', 1, 'Compra de última hora'),
+(6, '2024-08-08 09:45:00', 1, 'Saída'),
+(7, '2024-08-09 15:25:00', 1, 'Entrada'),
+(8, '2024-08-12 12:00:00', 1, 'Passou do prazo de validade'),
+(9, '2024-08-13 08:30:00', 1, 'Compra de última hora'),
+(10, '2024-08-14 10:45:00', 1, 'Entrada'),
+(11, '2024-08-15 13:15:00', 1, 'Entrada'),
+(12, '2024-08-16 09:00:00', 1, 'Saída'),
+(13, '2024-08-19 16:30:00', 1, 'Foi contaminado ou extraviado'),
+(14, '2024-08-20 08:55:00', 1, 'Entrada'),
+(15, '2024-08-21 11:25:00', 1, 'Saída'),
+(1, '2024-08-22 10:05:00', 1, 'Compra de última hora'),
+(2, '2024-08-23 14:10:00', 1, 'Entrada'),
+(3, '2024-08-26 16:40:00', 1, 'Saída'),
+(4, '2024-08-27 09:20:00', 1, 'Entrada'),
+(5, '2024-08-28 12:00:00', 1, 'Compra de última hora'),
+(6, '2024-08-29 13:30:00', 1, 'Entrada'),
+(7, '2024-08-30 15:00:00', 1, 'Não se sabe o paradeiro');
+
+INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
+(8, '2024-09-02 11:10:00', 1, 'Saída'),
+(9, '2024-09-03 14:00:00', 1, 'Entrada'),
+(10, '2024-09-04 09:50:00', 1, 'Entrada'),
+(11, '2024-09-05 12:25:00', 1, 'Saída'),
+(12, '2024-09-06 15:30:00', 1, 'Compra de última hora'),
+(13, '2024-09-09 08:40:00', 1, 'Entrada'),
+(14, '2024-09-10 13:10:00', 1, 'Saída'),
+(15, '2024-09-11 10:20:00', 1, 'Foi contaminado ou extraviado'),
+(1, '2024-09-12 12:50:00', 1, 'Saída'),
+(2, '2024-09-13 14:40:00', 1, 'Compra de última hora'),
+(3, '2024-09-16 09:25:00', 1, 'Entrada'),
+(4, '2024-09-17 11:30:00', 1, 'Saída'),
+(5, '2024-09-18 15:10:00', 1, 'Compra de última hora'),
+(6, '2024-09-19 08:50:00', 1, 'Entrada'),
+(7, '2024-09-20 14:00:00', 1, 'Saída'),
+(8, '2024-09-23 09:00:00', 1, 'Entrada'),
+(9, '2024-09-24 16:10:00', 1, 'Compra de última hora'),
+(10, '2024-09-25 13:20:00', 1, 'Saída'),
+(11, '2024-09-26 10:30:00', 1, 'Entrada'),
+(12, '2024-09-27 12:40:00', 1, 'Compra de última hora'),
+(13, '2024-09-30 08:30:00', 1, 'Passou do prazo de validade'),
+(1, '2024-09-10 08:30:00', 1, 'Entrada'), -- Adicionando Detergente OMO
+(3, '2024-09-15 14:45:00', 1, 'Compra de última hora'), -- Adicionando Cerveja Skol
+(10, '2024-09-20 10:15:00', 1, 'Saída'), -- Retirando Arroz Tio João
+(11, '2024-09-25 11:30:00', 1, 'Prazo de validade'), -- Retirando Arroz Camil
+(12, '2024-09-30 09:00:00', 1, 'Entrada'); -- Adicionando Cenoura Orgânica
 
 /*
 -- Inserts para interacao_estoque_audit
 INSERT INTO interacao_estoque_audit (descricao, dataHora, fkUsuario, fkInteracaoEstoque, fkProduto) VALUES
-('Entrada de Detergente OMO', '2024-08-10 08:30:00', 100, 1, 1), -- João Silva adicionou Detergente OMO
-('Entrada de Cerveja Skol', '2024-08-15 14:45:00', 101, 2, 3), -- Maria Souza adicionou Cerveja Skol
-('Saída de Arroz Tio João', '2024-08-20 10:15:00', 102, 3, 10), -- Carlos Pereira retirou Arroz Tio João
+('Entrada de Detergente OMO', '2024-09-10 08:30:00', 100, 1, 1), -- João Silva adicionou Detergente OMO
+('Entrada de Cerveja Skol', '2024-09-15 14:45:00', 101, 2, 3), -- Maria Souza adicionou Cerveja Skol
+('Saída de Arroz Tio João', '2024-09-20 10:15:00', 102, 3, 10), -- Carlos Pereira retirou Arroz Tio João
 */
 -- ============================================================================================================================================================
 SET @current_user_id = 100;
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
-(1, '2024-09-01 08:00:00', 1, 'Entrada'),
-(2, '2024-09-02 10:30:00', 1, 'Entrada'),
-(3, '2024-09-03 14:45:00', 1, 'Entrada'),
-(3, '2024-09-03 14:45:00', 1, 'Saída'),
-(4, '2024-09-04 11:20:00', 1, 'Compra de última hora'),
-(5, '2024-09-05 09:15:00', 1, 'Saída'),
-(6, '2024-09-06 12:00:00', 1, 'Entrada'),
-(7, '2024-09-07 16:30:00', 1, 'Saída'),
-(8, '2024-09-08 13:20:00', 1, 'Entrada'),
-(9, '2024-09-09 10:45:00', 1, 'Entrada'),
-(10, '2024-09-10 09:10:00', 1, 'Entrada'),
-(11, '2024-09-11 11:00:00', 1, 'Saída'),
-(12, '2024-09-12 14:25:00', 1, 'Compra de última hora'),
-(13, '2024-09-13 16:40:00', 1, 'Saída'),
-(14, '2024-09-14 08:50:00', 1, 'Entrada'),
-(15, '2024-09-14 08:50:00', 1, 'Saída'),
-(15, '2024-09-15 10:15:00', 1, 'Saída'),
-(16, '2024-09-16 12:30:00', 1, 'Entrada'),
-(1, '2024-09-17 15:20:00', 1, 'Entrada'),
-(2, '2024-09-18 13:35:00', 1, 'Saída'),
-(3, '2024-09-19 09:55:00', 1, 'Compra de última hora'),
-(4, '2024-09-20 11:10:00', 1, 'Compra de última hora'),
-(5, '2024-09-21 10:25:00', 1, 'Saída'),
-(6, '2024-09-22 12:45:00', 1, 'Compra de última hora'),
-(7, '2024-09-23 14:00:00', 1, 'Compra de última hora'),
-(8, '2024-09-24 16:20:00', 1, 'Saída'),
-(9, '2024-09-25 08:40:00', 1, 'Compra de última hora'),
-(10, '2024-09-26 09:50:00', 1, 'Prazo de validade'),
-(11, '2024-09-27 11:15:00', 1, 'Compra de última hora'),
-(12, '2024-09-28 13:00:00', 1, 'Compra de última hora'),
-(13, '2024-09-29 15:30:00', 1, 'Prazo de validade'),
-(14, '2024-09-30 14:10:00', 1, 'Compra de última hora'),
-(15, '2024-09-30 16:40:00', 1, 'Saída'),
-(1, '2024-10-01 08:20:00', 2, 'Entrada'),
-(2, '2024-10-02 10:00:00', 2, 'Compra de última hora'),
-(4, '2024-10-02 10:00:00', 2, 'Entrada'),
-(6, '2024-10-02 10:00:00', 2, 'Entrada'),
-(7, '2024-10-02 10:00:00', 2, 'Compra de última hora'),
-(3, '2024-10-03 11:45:00', 2, 'Contaminado ou extraviado'),
-(4, '2024-10-04 12:30:00', 2, 'Entrada'),
-(5, '2024-10-05 14:15:00', 2, 'Saída'),
-(6, '2024-10-06 15:20:00', 2, 'Entrada'),
-(7, '2024-10-07 16:10:00', 2, 'Entrada'),
-(8, '2024-10-08 08:55:00', 2, 'Saída'),
-(9, '2024-10-09 09:40:00', 2, 'Entrada'),
-(10, '2024-10-10 10:25:00', 2, 'Entrada'),
-(11, '2024-10-11 11:15:00', 2, 'Saída'),
-(12, '2024-10-12 13:00:00', 2, 'Entrada'),
-(13, '2024-10-13 14:45:00', 2, 'Saída'),
-(14, '2024-10-14 15:30:00', 2, 'Entrada'),
-(15, '2024-10-15 16:20:00', 2, 'Entrada'),
-(16, '2024-10-16 08:10:00', 2, 'Saída'),
-(1, '2024-10-17 09:50:00', 2, 'Entrada'),
-(2, '2024-10-18 10:35:00', 2, 'Entrada'),
-(3, '2024-10-19 11:25:00', 2, 'Saída'),
-(3, '2024-10-19 11:25:00', 2, 'Entrada');
+(1, '2024-10-01 08:00:00', 1, 'Foi contaminado ou extraviado'),
+(2, '2024-10-02 10:30:00', 1, 'Entrada'),
+(3, '2024-10-03 14:45:00', 1, 'Entrada'),
+(3, '2024-10-03 14:45:00', 1, 'Saída'),
+(4, '2024-10-04 11:20:00', 1, 'Compra de última hora'),
+(5, '2024-10-05 09:15:00', 1, 'Saída'),
+(6, '2024-10-06 12:00:00', 1, 'Entrada'),
+(7, '2024-10-07 16:30:00', 1, 'Saída'),
+(8, '2024-10-08 13:20:00', 1, 'Entrada'),
+(9, '2024-10-09 10:45:00', 1, 'Entrada'),
+(10, '2024-10-10 09:10:00', 1, 'Entrada'),
+(11, '2024-10-11 11:00:00', 1, 'Saída'),
+(12, '2024-10-12 14:25:00', 1, 'Compra de última hora'),
+(13, '2024-10-13 16:40:00', 1, 'Saída'),
+(14, '2024-10-14 08:50:00', 1, 'Entrada'),
+(15, '2024-10-14 08:50:00', 1, 'Saída'),
+(15, '2024-10-15 10:15:00', 1, 'Saída'),
+(16, '2024-10-16 12:30:00', 1, 'Entrada'),
+(1, '2024-10-17 15:20:00', 1, 'Entrada'),
+(2, '2024-10-18 13:35:00', 1, 'Saída'),
+(3, '2024-10-19 09:55:00', 1, 'Compra de última hora'),
+(4, '2024-10-20 11:10:00', 1, 'Compra de última hora'),
+(5, '2024-10-21 10:25:00', 1, 'Saída'),
+(6, '2024-10-22 12:45:00', 1, 'Compra de última hora'),
+(7, '2024-10-23 14:00:00', 1, 'Compra de última hora'),
+(8, '2024-10-24 16:20:00', 1, 'Saída'),
+(9, '2024-10-25 08:40:00', 1, 'Compra de última hora'),
+(10, '2024-10-26 09:50:00', 1, 'Prazo de validade'),
+(11, '2024-10-27 11:15:00', 1, 'Compra de última hora'),
+(12, '2024-10-28 13:00:00', 1, 'Compra de última hora'),
+(13, '2024-10-29 15:30:00', 1, 'Prazo de validade'),
+(14, '2024-10-30 14:10:00', 1, 'Compra de última hora'),
+(15, '2024-10-30 16:40:00', 1, 'Saída'),
+
+(1, '2024-11-01 08:20:00', 2, 'Compra de última hora'),
+(2, '2024-11-02 10:00:00', 2, 'Compra de última hora'),
+(4, '2024-11-02 10:00:00', 2, 'Entrada'),
+(6, '2024-11-02 10:00:00', 2, 'Compra de última hora'),
+(7, '2024-11-02 10:00:00', 2, 'Compra de última hora'),
+(3, '2024-11-03 11:45:00', 2, 'Contaminado ou extraviado'),
+(4, '2024-11-04 12:30:00', 2, 'Entrada'),
+(5, '2024-11-05 14:15:00', 2, 'Saída'),
+(6, '2024-11-06 15:20:00', 2, 'Entrada'),
+(7, '2024-11-07 16:10:00', 2, 'Entrada'),
+(8, '2024-11-08 08:55:00', 2, 'Saída'),
+(9, '2024-11-09 09:40:00', 2, 'Entrada'),
+(10, '2024-11-10 10:25:00', 2, 'Foi contaminado ou extraviado'),
+(11, '2024-11-11 11:15:00', 2, 'Não se sabe o paradeiro'),
+(12, '2024-11-12 13:00:00', 2, 'Entrada'),
+(13, '2024-11-13 14:45:00', 2, 'Saída'),
+(14, '2024-11-14 15:30:00', 2, 'Entrada'),
+(15, '2024-11-15 16:20:00', 2, 'Entrada'),
+(16, '2024-11-16 08:10:00', 2, 'Saída'),
+(1, '2024-11-17 09:50:00', 2, 'Foi contaminado ou extraviado'),
+(2, '2024-11-18 10:35:00', 2, 'Foi contaminado ou extraviado'),
+(3, '2024-11-19 11:25:00', 2, 'Saída'),(12, '2024-11-12 13:00:00', 2, 'Entrada'),
+(13, '2024-11-13 14:45:00', 2, 'Saída'),
+(14, '2024-11-14 15:30:00', 2, 'Entrada'),
+(15, '2024-11-15 16:20:00', 2, 'Entrada'),
+(16, '2024-11-16 08:10:00', 2, 'Não se sabe o paradeiro'),
+(1, '2024-11-17 09:50:00', 2, 'Entrada'),
+(2, '2024-11-18 10:35:00', 2, 'Entrada'),
+(3, '2024-11-01 11:25:00', 2, 'Saída'),
+(3, '2024-11-04 11:25:00', 2, 'Entrada'),
+(2, '2024-11-18 10:35:00', 2, 'Passou do prazo de validade'),
+(3, '2024-11-07 11:25:00', 2, 'Saída'),
+(3, '2024-11-09 11:25:00', 2, 'Entrada'),
+(2, '2024-11-18 10:35:00', 2, 'Passou do prazo de validade'),
+(3, '2024-11-22 11:25:00', 2, 'Passou do prazo de validade'),
+(3, '2024-11-29 11:25:00', 2, 'Passou do prazo de validade'),
+(2, '2024-11-18 10:35:00', 2, 'Passou do prazo de validade'),
+(3, '2024-11-19 11:25:00', 2, 'Passou do prazo de validade'),
+(3, '2024-11-19 11:25:00', 2, 'Entrada');
 SET @current_user_id = 101;
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
-(4, '2024-10-20 13:05:00', 2, 'Entrada'),
-(5, '2024-10-21 14:40:00', 2, 'Entrada'),
-(6, '2024-10-22 15:15:00', 2, 'Saída'),
-(7, '2024-10-23 16:00:00', 2, 'Entrada'),
-(8, '2024-10-24 08:45:00', 2, 'Contaminado ou extraviado'),
-(9, '2024-10-24 08:45:00', 2, 'Não se sabe o paradeiro'),
-(10, '2024-10-24 08:45:00', 2, 'Não se sabe o paradeiro');
+(4, '2024-11-20 13:05:00', 2, 'Entrada'),
+(5, '2024-11-21 14:40:00', 2, 'Entrada'),
+(6, '2024-11-22 15:15:00', 2, 'Saída'),
+(7, '2024-11-23 16:00:00', 2, 'Entrada'),
+(8, '2024-11-24 08:45:00', 2, 'Contaminado ou extraviado'),
+(9, '2024-11-24 08:45:00', 2, 'Não se sabe o paradeiro'),
+(10, '2024-11-24 08:45:00', 2, 'Não se sabe o paradeiro');
 SET @current_user_id = 102;
 INSERT INTO interacao_estoque (fk_produto, data_hora, fk_fechamento_estoque, categoria_interacao) VALUES
-(9, '2024-10-25 09:30:00', 2, 'Entrada'),
-(10, '2024-10-26 10:20:00', 2, 'Entrada'),
-(11, '2024-10-27 11:10:00', 2, 'Prazo de validade');
+(9, '2024-11-25 09:30:00', 2, 'Entrada'),
+(10, '2024-11-26 10:20:00', 2, 'Entrada'),
+(11, '2024-11-27 11:10:00', 2, 'Prazo de validade');
 SET @current_user_id = 100;
