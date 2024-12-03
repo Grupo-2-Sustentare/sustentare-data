@@ -84,6 +84,16 @@ CREATE PROCEDURE sp_kpi_perdas(
     OUT situacao VARCHAR(10)
 )
 BEGIN
+    DECLARE intervalo_dias INT;
+    DECLARE limite_bom INT;
+    DECLARE limite_medio_min INT;
+    DECLARE limite_medio_max INT;
+
+    SET intervalo_dias = DATEDIFF(p_data_fim, p_data_inicio);
+    SET limite_bom = ROUND(1 * (intervalo_dias / 30));
+    SET limite_medio_min = ROUND(2 * (intervalo_dias / 30));
+    SET limite_medio_max = ROUND(3 * (intervalo_dias / 30));
+
     SELECT COUNT(ie.categoria_interacao) INTO total_perdas
     FROM
         interacao_estoque ie
@@ -96,9 +106,9 @@ BEGIN
         AND (FIND_IN_SET(ci.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(i.nome, p_itens) > 0 OR p_itens IS NULL);
 
-    IF total_perdas <= 1 THEN
+    IF total_perdas <= limite_bom THEN
         SET situacao = 'Bom';
-    ELSEIF total_perdas BETWEEN 2 AND 3 THEN
+    ELSEIF total_perdas  BETWEEN limite_medio_min AND limite_medio_max THEN
         SET situacao = 'Mediano';
     ELSE
         SET situacao = 'Ruim';
@@ -116,6 +126,16 @@ CREATE PROCEDURE sp_kpi_compras_nao_planejadas(
     OUT situacao VARCHAR(10)
 )
 BEGIN
+    DECLARE intervalo_dias INT;
+    DECLARE limite_bom INT;
+    DECLARE limite_medio_min INT;
+    DECLARE limite_medio_max INT;
+
+    SET intervalo_dias = DATEDIFF(p_data_fim, p_data_inicio);
+    SET limite_bom = ROUND(1 * (intervalo_dias / 30));
+    SET limite_medio_min = ROUND(2 * (intervalo_dias / 30));
+    SET limite_medio_max = ROUND(3 * (intervalo_dias / 30));
+
     SELECT COUNT(*) INTO total_compras_nao_planejadas
     FROM
         interacao_estoque ie
@@ -128,9 +148,9 @@ BEGIN
         AND (FIND_IN_SET(ci.nome, p_categorias) > 0 OR p_categorias IS NULL)
         AND (FIND_IN_SET(i.nome, p_itens) > 0 OR p_itens IS NULL);
 
-    IF total_compras_nao_planejadas <= 3 THEN
+    IF total_compras_nao_planejadas <= limite_bom THEN
         SET situacao = 'Bom';
-    ELSEIF total_compras_nao_planejadas BETWEEN 4 AND 6 THEN
+    ELSEIF total_compras_nao_planejadas BETWEEN limite_medio_min AND limite_medio_max THEN
         SET situacao = 'Mediano';
     ELSE
         SET situacao = 'Ruim';
