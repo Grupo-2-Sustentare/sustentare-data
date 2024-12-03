@@ -84,7 +84,7 @@ CREATE PROCEDURE sp_kpi_perdas(
     OUT situacao VARCHAR(10)
 )
 BEGIN
-    SELECT COUNT(DISTINCT ie.categoria_interacao) INTO total_perdas
+    SELECT COUNT(ie.categoria_interacao) INTO total_perdas
     FROM
         interacao_estoque ie
 	JOIN produto p ON ie.fk_produto = p.id_produto
