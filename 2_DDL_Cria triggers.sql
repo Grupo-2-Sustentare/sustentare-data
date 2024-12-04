@@ -2,7 +2,7 @@ USE sustentare;
 
 -- Criando um primeiro usuário, para ser alvo das triggers
 SET @current_user_id = 100; -- Exemplo de Usuário que está adicionando dados no banco
-INSERT INTO usuario (nome, email, senha, acesso) VALUE ('Antônio', 'antonio@email.com', '$2a$10$yiybQz6WQtcqbwvZyedQE.uTyhD4wityRPxhV32HqPGHVm2BPskFy', 1);
+INSERT INTO usuario (nome, email, senha, acesso) VALUE ('Antônio', 'alexandra.yara@sptech.school', '$2a$10$yiybQz6WQtcqbwvZyedQE.uTyhD4wityRPxhV32HqPGHVm2BPskFy', 1);
 
 -- Trigger usuario
 DELIMITER $$
