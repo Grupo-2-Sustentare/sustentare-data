@@ -14,17 +14,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     PRIMARY KEY (id_usuario)
 ) AUTO_INCREMENT = 100;
 
-CREATE TABLE IF NOT EXISTS usuario_audit (
-    idUsuarioAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    responsavel INT NOT NULL,
-    usuarioAlterado INT NOT NULL,
-    PRIMARY KEY (idUsuarioAudit),
-    CONSTRAINT fk_responsavel FOREIGN KEY (responsavel) REFERENCES usuario (id_usuario),
-    CONSTRAINT fk_usuarioAlterado FOREIGN KEY (usuarioAlterado) REFERENCES usuario (id_usuario)
-);
-
 CREATE TABLE IF NOT EXISTS unidade_medida (
     id_unidade_medida INT NOT NULL AUTO_INCREMENT,
     categoria VARCHAR(75) NOT NULL,
@@ -35,33 +24,11 @@ CREATE TABLE IF NOT EXISTS unidade_medida (
     PRIMARY KEY (id_unidade_medida)
 );
 
-CREATE TABLE IF NOT EXISTS unidade_medida_audit (
-    idUnidadeMedidaAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    fkUsuario INT NOT NULL,
-    fkUnidadeMedida INT NOT NULL,
-    PRIMARY KEY (idUnidadeMedidaAudit),
-    CONSTRAINT fk_usuario_audit FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT fk_unidade_medida_audit FOREIGN KEY (fkUnidadeMedida) REFERENCES unidade_medida (id_unidade_medida)
-);
-
 CREATE TABLE IF NOT EXISTS categoria_item (
     id_categoria_item INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     ativo TINYINT NOT NULL,
     PRIMARY KEY (id_categoria_item)
-);
-
-CREATE TABLE IF NOT EXISTS categoria_item_audit (
-    idCategoriaItemAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    fkCategoriaItem INT NOT NULL,
-    fkUsuario INT NOT NULL,
-    PRIMARY KEY (idCategoriaItemAudit),
-    CONSTRAINT fk_usuario_categoria_item_audit FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT fk_categoria_categoria_item_audit FOREIGN KEY (fkCategoriaItem) REFERENCES categoria_item (id_categoria_item)
 );
 
 CREATE TABLE IF NOT EXISTS item (
@@ -135,3 +102,6 @@ CREATE TABLE IF NOT EXISTS interacao_estoque_audit (
     CONSTRAINT fk_usuario_interacao_estoque_audit FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
     CONSTRAINT fk_interacao_estoque_interacao_estoque_audit FOREIGN KEY (fkInteracaoEstoque, fkProduto) REFERENCES interacao_estoque (id_interacao_estoque, fk_produto)
 );
+
+CREATE USER IF NOT EXISTS 'projetoSemente'@'localhost' IDENTIFIED BY 'urubu100';
+GRANT ALL PRIVILEGES ON sustentare.* TO 'projetoSemente' @'localhost';
