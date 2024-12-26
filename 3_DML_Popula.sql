@@ -1,6 +1,6 @@
 USE sustentare;
 SET @current_user_id = 100; -- Exemplo de Usuário que está adicionando dados no banco
-
+INSERT INTO usuario (nome, email, senha, acesso, ativo) VALUES ('Antônio', 'antonio@gmail.com', '$2a$10$p.IEwyq.2J2Cqp6Dib3h/O.cWUzsVJGMZIiG/naN.OWPbibzMHxqe', 1, 1);
 INSERT INTO usuario (nome, email, senha, acesso, ativo) VALUES
 ('Maria Souza', 'maria.souza@gmail.com', 'senha456', 2, 1),
 ('Carlos Pereira', 'carlos.pereira@gmail.com', 'senha789', 2, 1);
