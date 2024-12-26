@@ -46,14 +46,14 @@ CREATE TABLE IF NOT EXISTS item (
 );
 
 CREATE TABLE IF NOT EXISTS item_audit (
-    idItemAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    fkItem INT NOT NULL,
-    fkUsuario INT NOT NULL,
-    PRIMARY KEY (idItemAudit),
-    CONSTRAINT fk_usuario_item_audit FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT fk_item_item_audit FOREIGN KEY (fkItem) REFERENCES item (id_item)
+    id_item_audit INT NOT NULL AUTO_INCREMENT,
+    descricao VARCHAR(60) NOT NULL,
+    data_hora DATETIME NOT NULL,
+    fk_item INT NOT NULL,
+    fk_usuario INT NOT NULL,
+    PRIMARY KEY (id_item_audit),
+    CONSTRAINT fk_usuario_item_audit FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
+    CONSTRAINT fk_item_item_audit FOREIGN KEY (fk_item) REFERENCES item (id_item)
 );
 
 CREATE TABLE IF NOT EXISTS produto (
@@ -68,19 +68,6 @@ CREATE TABLE IF NOT EXISTS produto (
     FOREIGN KEY (fk_item) REFERENCES item (id_item)
 );
 
-CREATE TABLE IF NOT EXISTS produto_audit (
-    idProdutoAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    fkUsuario INT NOT NULL,
-    fkProduto INT NOT NULL,
-    fkItem INT NOT NULL,
-    PRIMARY KEY (idProdutoAudit),
-    FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
-    FOREIGN KEY (fkProduto) REFERENCES produto (id_produto),
-    FOREIGN KEY (fkItem) REFERENCES item (id_item)
-);
-
 CREATE TABLE IF NOT EXISTS interacao_estoque (
     id_interacao_estoque INT NOT NULL AUTO_INCREMENT,
     fk_produto INT NOT NULL,
@@ -92,15 +79,15 @@ CREATE TABLE IF NOT EXISTS interacao_estoque (
 );
 
 CREATE TABLE IF NOT EXISTS interacao_estoque_audit (
-    idInteracaoEstoqueAudit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(45) NOT NULL,
-    dataHora DATETIME NOT NULL,
-    fkUsuario INT NOT NULL,
-    fkInteracaoEstoque INT NOT NULL,
-    fkProduto INT NOT NULL,
-    PRIMARY KEY (idInteracaoEstoqueAudit),
-    CONSTRAINT fk_usuario_interacao_estoque_audit FOREIGN KEY (fkUsuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT fk_interacao_estoque_interacao_estoque_audit FOREIGN KEY (fkInteracaoEstoque, fkProduto) REFERENCES interacao_estoque (id_interacao_estoque, fk_produto)
+    id_interacao_estoque_audit INT NOT NULL AUTO_INCREMENT,
+    descricao VARCHAR(60) NOT NULL,
+    data_hora DATETIME NOT NULL,
+    fk_usuario INT NOT NULL,
+    fk_interacao_estoque INT NOT NULL,
+    fk_produto INT NOT NULL,
+    PRIMARY KEY (id_interacao_estoque_audit),
+    CONSTRAINT fk_usuario_interacao_estoque_audit FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
+    CONSTRAINT fk_interacao_estoque_interacao_estoque_audit FOREIGN KEY (fk_interacao_estoque, fk_produto) REFERENCES interacao_estoque (id_interacao_estoque, fk_produto)
 );
 
 CREATE USER IF NOT EXISTS 'projetoSemente'@'localhost' IDENTIFIED BY 'urubu100';
