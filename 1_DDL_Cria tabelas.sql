@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS item (
 
 CREATE TABLE IF NOT EXISTS item_audit (
     id_item_audit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(60) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
     data_hora DATETIME NOT NULL,
     fk_item INT NOT NULL,
     fk_usuario INT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS interacao_estoque (
 
 CREATE TABLE IF NOT EXISTS interacao_estoque_audit (
     id_interacao_estoque_audit INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(60) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
     data_hora DATETIME NOT NULL,
     fk_usuario INT NOT NULL,
     fk_interacao_estoque INT NOT NULL,
